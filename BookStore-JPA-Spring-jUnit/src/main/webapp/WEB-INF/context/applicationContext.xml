@@ -1,0 +1,46 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:webflow="http://www.springframework.org/schema/webflow-config" xmlns:faces="http://www.springframework.org/schema/faces" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd http://www.springframework.org/schema/faces http://www.springframework.org/schema/faces/spring-faces-2.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd" default-autowire="byType">
+    <!-- Pro konfiguraci Spring beans budou pouzity take anotace -->
+    <context:annotation-config />      
+    <!-- Spring beans budou hledany v balicku cz.cvut.kbss (podpora anotaci @Component, @Repository, @Service) -->
+    <context:component-scan base-package="cz.cvut.fel.wpa"/>
+    <!-- Podpora anotace @Configurable -->
+    <context:spring-configured/> 
+    <!-- Property files -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/properties/jdbc.properties</value>
+                <value>/WEB-INF/properties/jpa.properties</value>
+            </list>
+        </property>
+    </bean>        
+    <!-- Connection pool -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="2" />
+        <property name="minIdle" value="2" />
+    </bean>
+ 
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="${jpa.platform}"/>
+                <property name="generateDdl" value="true"/>
+                <property name="showSql" value="true"/>            
+            </bean>
+        </property>
+        <property name="packagesToScan" value="cz.cvut.fel.wpa" />
+    </bean> 
+    
+    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    
+    <!-- Podpora deklarativni demarkace transakci - anotace @Transactional-->
+    <tx:annotation-driven transaction-manager="txManager" /> 
+</beans>
