@@ -12,8 +12,8 @@ public class SalesmanDto extends UserDto {
         super();
     }
 
-    public SalesmanDto(String userName, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers) {
-        super(userName, state, email, issues, operations);
+    public SalesmanDto(Long id,String userName, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers) {
+        super(id, userName, state, email, issues, operations);
         this.customers = customers;
     }
 

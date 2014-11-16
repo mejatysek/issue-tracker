@@ -18,7 +18,8 @@ public class UserDto extends AbstractDto{
     public UserDto() {
     }
 
-    public UserDto(String userName, boolean state, String email, List<Long> issues, List<Long> operations) {
+    public UserDto(Long id, String userName, boolean state, String email, List<Long> issues, List<Long> operations) {
+        this.id = id;
         this.userName = userName;
         this.state = state;
         this.email = email;
@@ -34,9 +35,7 @@ public class UserDto extends AbstractDto{
         this.userName = userName;
     }
 
-    public boolean isState() {
-        return state;
-    }
+    public boolean getState() {return this.state;}
 
     public void setState(boolean state) {
         this.state = state;

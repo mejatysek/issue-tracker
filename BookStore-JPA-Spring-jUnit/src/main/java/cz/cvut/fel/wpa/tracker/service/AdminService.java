@@ -31,6 +31,9 @@ public interface AdminService {
     @Transactional(readOnly = true)
     public List<AdminDto> getAdminByState(boolean state);
 
-    public void deactivateAdmin(AdminDto admin);
+    @Transactional(readOnly = true)
+    public List<AdminDto> getAdminByUsername(String username);
+
+    public void deactivateAdmin(Long id);
 
 }

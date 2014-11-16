@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by mejty on 14.11.14.
  */
-public class IssueDto {
+public class IssueDto extends  AbstractDto{
     private String topic;
     private short state;
     private Long product;
@@ -17,6 +17,7 @@ public class IssueDto {
     }
 
     public IssueDto(String topic, short state, Long product, List<Long> workers, List<Long> operations, List<Long> relations) {
+        this.id = id;
         this.topic = topic;
         this.state = state;
         this.product = product;

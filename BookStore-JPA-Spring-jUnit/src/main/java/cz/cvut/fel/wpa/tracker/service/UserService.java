@@ -12,11 +12,11 @@ import java.util.List;
 @Transactional
 public interface UserService {
 
-    public Long addUser(String userName, boolean state, String email);
+    public Long addUser(String userName, String password, boolean state, String email);
 
-    public Long addUser(String userName, boolean state, String email, List<Long> issues);
+    public Long addUser(String userName, String password, boolean state, String email, List<Long> issues);
 
-    public Long addUser(String userName, boolean state, String email, List<Long> issues, List<Long> operations);
+    public Long addUser(String userName, String password, boolean state, String email, List<Long> issues, List<Long> operations);
 
     public void deactivateUser(Long userId);
 

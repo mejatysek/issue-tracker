@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by mejty on 14.11.14.
  */
-public class OperationDto {
+public class OperationDto extends AbstractDto{
     private Date time;
     private Long owner;
     private String body;
@@ -13,7 +13,8 @@ public class OperationDto {
     public OperationDto() {
     }
 
-    public OperationDto(Date time, Long owner, String body) {
+    public OperationDto(Long id, Date time, Long owner, String body) {
+        this.id=id;
         this.time = time;
         this.owner = owner;
         this.body = body;

@@ -11,7 +11,7 @@ public class AdminDto extends SalesmanDto{
         super();
     }
 
-    public AdminDto(String userName, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers) {
-        super(userName, state, email, issues, operations, customers);
+    public AdminDto(Long id,String userName, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers) {
+        super(id, userName, state, email, issues, operations, customers);
     }
 }

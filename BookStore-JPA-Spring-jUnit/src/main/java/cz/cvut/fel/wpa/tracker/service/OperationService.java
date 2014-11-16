@@ -7,6 +7,7 @@ package cz.cvut.fel.wpa.tracker.service;
 import cz.cvut.fel.wpa.tracker.dto.OperationDto;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -28,6 +29,6 @@ public interface OperationService {
     @Transactional(readOnly = true)
     public OperationDto getOperationById(Long id);
 
-    public Long addOperation(short type, Long issue1, Long issue2);
+    public Long addOperation(Date time, Long owner, Long issue,String body);
 
 }

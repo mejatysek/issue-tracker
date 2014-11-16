@@ -5,14 +5,15 @@ import java.util.List;
 /**
  * Created by mejty on 14.11.14.
  */
-public class RelationDto {
+public class RelationDto extends AbstractDto{
     private short type;
     private List<Long> issues;
 
     public RelationDto() {
     }
 
-    public RelationDto(short type, List<Long> issues) {
+    public RelationDto(Long id, short type, List<Long> issues) {
+        this.id = id;
         this.type = type;
         this.issues = issues;
     }

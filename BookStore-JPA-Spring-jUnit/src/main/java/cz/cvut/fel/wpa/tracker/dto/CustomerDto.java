@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by mejty on 14.11.14.
  */
-public class CustomerDto {
+public class CustomerDto extends AbstractDto{
     private String name;
     private String email;
     private String sla;
@@ -17,7 +17,8 @@ public class CustomerDto {
 
     }
 
-    public CustomerDto(String name, String email, String sla, boolean state, List<Long> products, Long salesman) {
+    public CustomerDto(Long id,String name, String email, String sla, boolean state, List<Long> products, Long salesman) {
+        this.id=id;
         this.name = name;
         this.email = email;
         this.sla = sla;

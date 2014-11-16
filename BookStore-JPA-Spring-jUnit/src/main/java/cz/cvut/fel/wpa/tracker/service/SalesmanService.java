@@ -12,13 +12,13 @@ import java.util.List;
 @Transactional
 public interface SalesmanService {
 
-    public Long addSalesman(String userName, boolean state, String email);
+    public Long addSalesman(String userName, String password, boolean state, String email);
 
-    public Long addSalesman(String userName, boolean state, String email, List<Long> issues);
+    public Long addSalesman(String userName, String password, boolean state, String email, List<Long> issues);
 
-    public Long addSalesman(String userName, boolean state, String email, List<Long> issues, List<Long> operations);
+    public Long addSalesman(String userName, String password, boolean state, String email, List<Long> issues, List<Long> operations);
 
-    public Long addSalesman(String userName, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers);
+    public Long addSalesman(String userName, String password, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers);
 
     public Long editSalesman(SalesmanDto user);
 
@@ -31,6 +31,9 @@ public interface SalesmanService {
     @Transactional(readOnly = true)
     public List<SalesmanDto> getSalesmanByState(boolean state);
 
-    public void deactivateSalesman(SalesmanDto salesman);
+    @Transactional(readOnly = true)
+    public List<SalesmanDto> getSalesmanByUsername(String username);
+
+    public void deactivateSalesman(Long id);
 
 }
