@@ -8,6 +8,7 @@ import java.util.List;
 public class IssueDto {
     private String topic;
     private short state;
+    private Long product;
     private List<Long> workers;
     private List<Long> operations;
     private List<Long> relations;
@@ -15,9 +16,10 @@ public class IssueDto {
     public IssueDto() {
     }
 
-    public IssueDto(String topic, short state, List<Long> workers, List<Long> operations, List<Long> relations) {
+    public IssueDto(String topic, short state, Long product, List<Long> workers, List<Long> operations, List<Long> relations) {
         this.topic = topic;
         this.state = state;
+        this.product = product;
         this.workers = workers;
         this.operations = operations;
         this.relations = relations;

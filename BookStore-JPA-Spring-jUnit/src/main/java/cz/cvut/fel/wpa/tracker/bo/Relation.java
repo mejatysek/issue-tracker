@@ -28,8 +28,13 @@ public class Relation extends AbstractBusinessObject {
         return issues;
     }
 
-    public void setIssues(List<Issue> issues) {
-        this.issues = issues;
+    public boolean setIssues(List<Issue> issues) {
+
+        if(issues.size()<=2){
+            this.issues = issues;
+            return true;
+        }
+        return false;
     }
 
     public boolean addIssue(Issue issue){

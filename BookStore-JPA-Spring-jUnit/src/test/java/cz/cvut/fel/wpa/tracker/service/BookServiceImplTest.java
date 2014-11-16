@@ -30,7 +30,7 @@
 //    @Test
 //    public void testAddAndRetrieveBook() {
 //
-//        Long userId = addUser();
+//        Long userId = addSalesman();
 //
 //        String title = "Bob a Bobek, kralici z klobouku";
 //
@@ -47,7 +47,7 @@
 //
 //    @Test
 //    public void testAddAndRemoveBook() {
-//        Long userId = addUser();
+//        Long userId = addSalesman();
 //
 //        String title = "Bob a Bobek, kralici z klobouku";
 //        Long bookId = bookService.addBook(title, userId);
@@ -58,7 +58,7 @@
 //
 //    @Test
 //    public void testBookDeletedWhenUserRemoved(){
-//        Long userId = addUser();
+//        Long userId = addSalesman();
 //
 //        String title = "Bob a Bobek, kralici z klobouku";
 //        bookService.addBook(title, userId);
@@ -69,11 +69,11 @@
 //
 //    }
 //
-//    private long addUser() {
+//    private long addSalesman() {
 //        String userName = "UserName" + System.currentTimeMillis();
 //        String passwd = "passwd" + System.currentTimeMillis();
 //        int age = 18;
 //
-//        return userService.addUser(userName, passwd, age);
+//        return userService.addSalesman(userName, passwd, age);
 //    }
 //}

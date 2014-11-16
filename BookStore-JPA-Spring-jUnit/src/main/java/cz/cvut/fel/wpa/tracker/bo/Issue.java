@@ -19,6 +19,9 @@ public class Issue extends AbstractBusinessObject {
 
     private short state;
 
+    @ManyToOne
+    private Product product;
+
     @OneToMany
     @OrderBy("time asc")
     private List<Operation> operations;
@@ -92,5 +95,13 @@ public class Issue extends AbstractBusinessObject {
         if(!this.workers.contains(worker)){
             workers.add(worker);
         }
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

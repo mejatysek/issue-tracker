@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 public class Salesman extends User {
 
     @OneToMany
+    @OrderBy("state, name")
     private List<Customer> customers;
 
     public List<Customer> getCustomers() {

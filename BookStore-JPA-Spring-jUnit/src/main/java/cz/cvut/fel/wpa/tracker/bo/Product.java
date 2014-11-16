@@ -4,10 +4,9 @@
  */
 package cz.cvut.fel.wpa.tracker.bo;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -17,6 +16,9 @@ public class Product extends AbstractBusinessObject {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Customer customer;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<Issue> issues;
 
     private String sla;
 
@@ -63,5 +65,22 @@ public class Product extends AbstractBusinessObject {
 
     public void setState(boolean state) {
         this.state = state;
+    }
+
+    public List<Issue> getIssues() {
+        return issues;
+    }
+
+    public void setIssues(List<Issue> issues) {
+        this.issues = issues;
+    }
+
+    public void addIssue(Issue issue){
+        if(this.issues == null){
+            issues = new ArrayList<Issue>();
+        }
+        if(!this.issues.contains(issue)){
+            issues.add(issue);
+        }
     }
 }

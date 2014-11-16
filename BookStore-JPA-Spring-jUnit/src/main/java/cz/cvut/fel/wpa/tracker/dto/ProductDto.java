@@ -1,5 +1,7 @@
 package cz.cvut.fel.wpa.tracker.dto;
 
+import java.util.List;
+
 /**
  * Created by mejty on 14.11.14.
  */
@@ -9,16 +11,18 @@ public class ProductDto {
     private float price;
     private boolean state;
     private Long customer;
+    private List<Long> issues;
 
     public ProductDto() {
     }
 
-    public ProductDto(String name, String sla, float price, boolean state, Long customer) {
+    public ProductDto(String name, String sla, float price, boolean state, Long customer, List<Long> issues) {
         this.name = name;
         this.sla = sla;
         this.price = price;
         this.state = state;
         this.customer = customer;
+        this.issues = issues;
     }
 
     public String getName() {

@@ -25,7 +25,7 @@
 //        String passwd = "passwd";
 //        int age = 18;
 //
-//        Long id = userService.addUser(userName, passwd, age);
+//        Long id = userService.addSalesman(userName, passwd, age);
 //        UserDto userDto = userService.getUserById(id);
 //
 //        assertEquals(userName, userDto.getUserName());
@@ -39,7 +39,7 @@
 //        String passwd = "passwd";
 //        int age = 18;
 //
-//        Long id = userService.addUser(userName, passwd, age);
+//        Long id = userService.addSalesman(userName, passwd, age);
 //        assertEquals(1, userService.getAllUsers().size());
 //        userService.deleteUser(id);
 //        assertEquals(0, userService.getAllUsers().size());
