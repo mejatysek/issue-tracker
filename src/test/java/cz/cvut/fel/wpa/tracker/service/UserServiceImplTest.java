@@ -79,7 +79,7 @@ public class UserServiceImplTest extends AbstractServiceTest {
 
     @Test
 
-    public void getUserbyUsername(){
+    public void getUserByUsername(){
         String userName = "UserName";
         String passwd = "passwd";
         boolean state = true;
@@ -88,6 +88,9 @@ public class UserServiceImplTest extends AbstractServiceTest {
         Long id = userService.addUser(userName, passwd, state, email);
         UserDto userDto = userService.getUserById(id);
         assertEquals(1,userService.getUserByUsername(userName).size());
+        assertEquals(userName, userDto.getUserName());
+        assertEquals(state, userDto.getState());
+        assertEquals(email, userDto.getEmail());
         assertEquals(0,userService.getUserByUsername("999999999").size());
     }
 

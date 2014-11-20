@@ -83,7 +83,7 @@ public class SalesmanServiceImplTest extends AbstractServiceTest {
 
     @Test
 
-    public void getSalesmanbySalesmanname(){
+    public void getSalesmanByUsername(){
         String SalesmanName = "SalesmanName";
         String passwd = "passwd";
         boolean state = true;
@@ -93,6 +93,9 @@ public class SalesmanServiceImplTest extends AbstractServiceTest {
         Long id = salesmanServiceService.addSalesman(SalesmanName, passwd, state, email, null, null, customers);
         SalesmanDto SalesmanDto = salesmanServiceService.getSalesmanById(id);
         assertEquals(1, salesmanServiceService.getSalesmanByUsername(SalesmanName).size());
+        assertEquals(SalesmanName,SalesmanDto.getUserName());
+        assertEquals(email,SalesmanDto.getEmail());
+        assertEquals(customers,SalesmanDto.getCustomers());
         assertEquals(0, salesmanServiceService.getSalesmanByUsername("999999999").size());
     }
 }
