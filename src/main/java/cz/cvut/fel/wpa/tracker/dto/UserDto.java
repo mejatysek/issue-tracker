@@ -13,6 +13,7 @@ public class UserDto extends AbstractDto{
     private String email;
     private List<Long> issues;
     private List<Long> operations;
+    private List<Long> customers;
 
 
     public UserDto() {
@@ -25,6 +26,11 @@ public class UserDto extends AbstractDto{
         this.email = email;
         this.issues = issues;
         this.operations = operations;
+    }
+
+    public UserDto(Long id,String userName, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers) {
+        this(id, userName, state, email, issues, operations);
+        this.customers = customers;
     }
 
     public String getUserName() {
@@ -63,5 +69,13 @@ public class UserDto extends AbstractDto{
 
     public void setOperations(List<Long> operations) {
         this.operations = operations;
+    }
+
+    public List<Long> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Long> customers) {
+        this.customers = customers;
     }
 }

@@ -11,20 +11,20 @@ public class CustomerDto extends AbstractDto{
     private String sla;
     private boolean state;
     private List<Long> products;
-    private Long salesman;
+    private Long user;
 
     public CustomerDto() {
 
     }
 
-    public CustomerDto(Long id,String name, String email, String sla, boolean state, List<Long> products, Long salesman) {
+    public CustomerDto(Long id,String name, String email, String sla, boolean state, List<Long> products, Long user) {
         this.id=id;
         this.name = name;
         this.email = email;
         this.sla = sla;
         this.state = state;
         this.products = products;
-        this.salesman = salesman;
+        this.user = user;
     }
 
     public String getName() {
@@ -67,11 +67,11 @@ public class CustomerDto extends AbstractDto{
         this.products = products;
     }
 
-    public Long getSalesman() {
-        return salesman;
+    public Long getUser() {
+        return user;
     }
 
-    public void setSalesman(Long salesman) {
-        this.salesman = salesman;
+    public void setUser(Long user) {
+        this.user = user;
     }
 }

@@ -32,15 +32,15 @@ public interface CustomerService {
     /**
      * Get all customers owned by the given user
      *
-     * @param salesmanId identifier of the salesman or admin
-     * @return users customers
+     * @param userId identifier of the salesman or admin
+     * @return users customersg
      */
     @Transactional(readOnly = true)
-    public List<CustomerDto> getSalesmanCustomers(Long salesmanId);
+    public List<CustomerDto> getUserCustomers(Long userId);
 
-    public Long addCustomer(String name, String email, String sla, Long salesman);
+    public Long addCustomer(String name, String email, String sla, Long user);
 
-    public Long addCustomer(String name, String email, String sla, Long salesman, boolean state);
+    public Long addCustomer(String name, String email, String sla, Long user, boolean state);
 
     public CustomerDto getCustomerById(Long customerId);
 

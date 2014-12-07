@@ -18,6 +18,8 @@ public interface UserService {
 
     public Long addUser(String userName, String password, boolean state, String email, List<Long> issues, List<Long> operations);
 
+    public Long addUser(String userName, String password, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers);
+
     public void deactivateUser(Long userId);
 
     public Long editUser(UserDto user);

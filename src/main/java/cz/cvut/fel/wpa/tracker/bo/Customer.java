@@ -25,7 +25,7 @@ public class Customer extends AbstractBusinessObject {
     private List<Product> products;
 
     @ManyToOne
-    private Salesman salesman;
+    private User user;
 
     public String getName() {
         return name;
@@ -59,13 +59,13 @@ public class Customer extends AbstractBusinessObject {
         this.state = state;
     }
 
-    public Salesman getSalesman() {
-        return salesman;
+    public User getUser() {
+        return user;
     }
 
-    public void setSalesman(Salesman salesman) {
-        this.salesman = salesman;
-        salesman.addCustomer(this);
+    public void setUser(User user) {
+        this.user = user;
+        user.addCustomer(this);
     }
 
     public List<Product> getProducts() {

@@ -1,5 +1,6 @@
 package cz.cvut.fel.wpa.tracker.service;
 
+import cz.cvut.fel.wpa.tracker.bo.Customer;
 import cz.cvut.fel.wpa.tracker.bo.Issue;
 import cz.cvut.fel.wpa.tracker.bo.Operation;
 import cz.cvut.fel.wpa.tracker.bo.User;
@@ -29,25 +30,41 @@ public class UserServiceImp extends AbstractDataAccessService implements UserSer
 
     @Override
     public Long addUser(String userName, String password, boolean state, String email, List<Long> issues, List<Long> operations) {
+        return addUser(userName, password, state, email, issues, operations, null);
+    }
+
+    @Override
+    public Long addUser(String userName, String password, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers) {
         User u = new User();
         u.setUserName(userName);
         u.setState(state);
         u.setEmail(email);
         u.setPassword(password);
-        List<Issue> issues1 = new ArrayList<Issue>();
+
+        List<Issue> issueList = new ArrayList<Issue>();
         if (issues != null) {
             for (Long issue : issues) {
-                issues1.add(genericDao.getById(issue, Issue.class));
+                issueList.add(genericDao.getById(issue, Issue.class));
             }
         }
-        u.setIssues(issues1);
-        List<Operation> list = new ArrayList<Operation>();
-        if (issues != null) {
+        u.setIssues(issueList);
+
+        List<Operation> operationList = new ArrayList<Operation>();
+        if (operations != null) {
             for (Long operation : operations) {
-                list.add(genericDao.getById(operation, Operation.class));
+                operationList.add(genericDao.getById(operation, Operation.class));
             }
         }
-        u.setOperations(list);
+        u.setOperations(operationList);
+
+        List<Customer> customerList = new ArrayList<Customer>();
+        if (customers != null) {
+            for (Long customer : customers) {
+                customerList.add(genericDao.getById(customer, Customer.class));
+            }
+        }
+        u.setCustomers(customerList);
+
         return genericDao.saveOrUpdate(u).getId();
     }
 
@@ -59,27 +76,37 @@ public class UserServiceImp extends AbstractDataAccessService implements UserSer
     }
 
     @Override
-    public Long editUser(UserDto user) {
-        User user1 = genericDao.getById(user.getId(), User.class);
-        user1.setUserName(user.getUserName());
-        user1.setState(user.getState());
-        user1.setEmail(user.getEmail());
-        List<Issue> list = new ArrayList<Issue>();
-        if (user.getIssues() != null) {
-            for (Long issue : user.getIssues()) {
-                list.add(genericDao.getById(issue, Issue.class));
-            }
-        }
-        user1.setIssues(list);
+    public Long editUser(UserDto userDto) {
+        User user = genericDao.getById(userDto.getId(), User.class);
+        user.setUserName(userDto.getUserName());
+        user.setState(userDto.getState());
+        user.setEmail(userDto.getEmail());
 
-        List<Operation> a = new ArrayList<Operation>();
-        if (user.getOperations() != null) {
-            for (Long operation : user.getOperations()) {
-                a.add(genericDao.getById(operation, Operation.class));
+        List<Issue> issueList = new ArrayList<Issue>();
+        if (userDto.getIssues() != null) {
+            for (Long issue : userDto.getIssues()) {
+                issueList.add(genericDao.getById(issue, Issue.class));
             }
         }
-        user1.setOperations(a);
-        return genericDao.saveOrUpdate(user1).getId();
+        user.setIssues(issueList);
+
+        List<Operation> operationList = new ArrayList<Operation>();
+        if (userDto.getOperations() != null) {
+            for (Long operation : userDto.getOperations()) {
+                operationList.add(genericDao.getById(operation, Operation.class));
+            }
+        }
+        user.setOperations(operationList);
+
+        List<Customer> customerList = new ArrayList<Customer>();
+        if (userDto.getCustomers() != null) {
+            for (Long customer : userDto.getCustomers()) {
+                customerList.add(genericDao.getById(customer, Customer.class));
+            }
+        }
+        user.setCustomers(customerList);
+
+        return genericDao.saveOrUpdate(user).getId();
     }
 
     @Override
@@ -128,7 +155,7 @@ public class UserServiceImp extends AbstractDataAccessService implements UserSer
     }
 
     private UserDto DtofromBo(User user) {
-        return new UserDto(user.getId(), user.getUserName(), user.isState(), user.getEmail(), DtoTransformerHelper.getIdentifiers(user.getIssues()), DtoTransformerHelper.getIdentifiers(user.getOperations()));
+        return new UserDto(user.getId(), user.getUserName(), user.isState(), user.getEmail(), DtoTransformerHelper.getIdentifiers(user.getIssues()), DtoTransformerHelper.getIdentifiers(user.getOperations()), DtoTransformerHelper.getIdentifiers(user.getCustomers()));
     }
 
 }
