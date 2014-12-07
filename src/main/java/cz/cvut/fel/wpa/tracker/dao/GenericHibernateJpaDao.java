@@ -67,6 +67,28 @@ public class GenericHibernateJpaDao implements GenericDao {
     }
 
     /**
+     * Vrati vsechny objekty serazene sestupne dle dane property
+     *
+     * @param property
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public <ENTITY> List<ENTITY> getByPropertyOrderedDesc(String property, Object value, String orderBy, Class<ENTITY> clazz) {
+        return getEntityManager().createQuery("SELECT e FROM " + clazz.getSimpleName() + " e  WHERE e." + property + " = :value ORDER BY e.:orderBy DESC").setParameter("value", value).setParameter("orderBy",orderBy).getResultList();
+    }
+
+    /**
+     * Vrati vsechny objekty serazene vzestupne dle dane property
+     *
+     * @param property
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public <ENTITY> List<ENTITY> getByPropertyOrderedAsc(String property, Object value, String orderBy, Class<ENTITY> clazz) {
+        return getEntityManager().createQuery("SELECT e FROM " + clazz.getSimpleName() + " e  WHERE e." + property + " = :value ORDER BY e.:orderBy ASC").setParameter("value", value).setParameter("orderBy",orderBy).getResultList();
+    }
+
+    /**
      * Vrati objekty dane tridy, jejichz property se rovna objektu predanemu v
      * parametru, serazene dle id sestupne
      *

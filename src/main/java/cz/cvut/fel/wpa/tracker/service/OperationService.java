@@ -31,4 +31,6 @@ public interface OperationService {
 
     public Long addOperation(Date time, Long owner, Long issue,String body);
 
+    public void deleteOperation(Long id);
+
 }

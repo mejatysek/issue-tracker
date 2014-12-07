@@ -111,4 +111,19 @@ public interface GenericDao {
      * @return
      */
     public <ENTITY> List<ENTITY> getPage(int first, int rows, String sortBy, boolean ascending, Class<ENTITY> clazz);
+
+    /**
+     * Vrati instance vyfiltrovane podle property a razene sestupne dle property
+     * @param property
+     * @return
+     */
+    public <ENTITY> List<ENTITY> getByPropertyOrderedDesc(String property, Object value, String orderBy, Class<ENTITY> clazz);
+
+    /**
+     * Vrati instance vyfiltrovane podle property a razene vzestupne dle property
+     * @param property
+     * @return
+     */
+    public <ENTITY> List<ENTITY> getByPropertyOrderedAsc(String property, Object value, String orderBy, Class<ENTITY> clazz);
+
 }
