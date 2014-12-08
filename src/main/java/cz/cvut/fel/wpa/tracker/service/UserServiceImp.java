@@ -113,7 +113,7 @@ public class UserServiceImp extends AbstractDataAccessService implements UserSer
     public UserDto getUserById(Long id) {
         User u = genericDao.getById(id, User.class);
         if (u != null) {
-            return DtofromBo(u);
+            return dtoFromBo(u);
         }
         return new UserDto();
     }
@@ -124,7 +124,7 @@ public class UserServiceImp extends AbstractDataAccessService implements UserSer
         List<User> users = genericDao.getAll(User.class);
         if (users != null) {
             for (User u : users) {
-                list.add(DtofromBo(u));
+                list.add(dtoFromBo(u));
             }
         }
         return list;
@@ -136,7 +136,7 @@ public class UserServiceImp extends AbstractDataAccessService implements UserSer
         List<User> users = genericDao.getByProperty("userName", username, User.class);
         if (users != null) {
             for (User u : users) {
-                list.add(DtofromBo(u));
+                list.add(dtoFromBo(u));
             }
         }
         return list;
@@ -148,13 +148,13 @@ public class UserServiceImp extends AbstractDataAccessService implements UserSer
         List<User> users = genericDao.getByProperty("state", state, User.class);
         if (users != null) {
             for (User u : users) {
-                list.add(DtofromBo(u));
+                list.add(dtoFromBo(u));
             }
         }
         return list;
     }
 
-    private UserDto DtofromBo(User user) {
+    private UserDto dtoFromBo(User user) {
         return new UserDto(user.getId(), user.getUserName(), user.isState(), user.getEmail(), DtoTransformerHelper.getIdentifiers(user.getIssues()), DtoTransformerHelper.getIdentifiers(user.getOperations()), DtoTransformerHelper.getIdentifiers(user.getCustomers()));
     }
 

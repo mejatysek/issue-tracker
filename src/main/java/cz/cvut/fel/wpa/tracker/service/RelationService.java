@@ -17,7 +17,7 @@ public interface RelationService {
     public List<RelationDto> getAllRelations();
 
     @Transactional(readOnly = true)
-    public List<RelationDto> getRelationsbyType(short type);
+    public List<RelationDto> getRelationsByType(short type);
 
     @Transactional(readOnly = true)
     public List<RelationDto> getIssueRelations(Long issueId);
@@ -29,5 +29,7 @@ public interface RelationService {
     public RelationDto getRelationById(Long id);
 
     public Long addRelation(short type, Long issue1, Long issue2);
+
+    public void deleteRelation(Long id);
 
 }
