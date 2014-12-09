@@ -16,7 +16,7 @@ public class IssueDto extends  AbstractDto{
     public IssueDto() {
     }
 
-    public IssueDto(String topic, short state, Long product, List<Long> workers, List<Long> operations, List<Long> relations) {
+    public IssueDto(Long id, String topic, short state, Long product, List<Long> workers, List<Long> operations, List<Long> relations) {
         this.id = id;
         this.topic = topic;
         this.state = state;

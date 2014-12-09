@@ -3,9 +3,7 @@ package cz.cvut.fel.wpa.tracker.service;
 import cz.cvut.fel.wpa.tracker.bo.Issue;
 import cz.cvut.fel.wpa.tracker.bo.Operation;
 import cz.cvut.fel.wpa.tracker.bo.User;
-import cz.cvut.fel.wpa.tracker.dto.IssueDto;
 import cz.cvut.fel.wpa.tracker.dto.OperationDto;
-import cz.cvut.fel.wpa.tracker.dto.UserDto;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class OperationServiceImpl extends AbstractDataAccessService implements O
 
         List<Operation> operations;
         if (number > 0) {
-            operations = genericDao.getByPropertyOrderedDesc("user", userId, "time", Operation.class);
+            operations = genericDao.getByPropertyOrderedDesc("owner", userId, "time", Operation.class);
         }else{
             operations = genericDao.getByProperty("owner", userId, Operation.class);
         }

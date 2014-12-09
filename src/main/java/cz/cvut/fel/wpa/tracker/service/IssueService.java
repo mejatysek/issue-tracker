@@ -4,7 +4,9 @@
  */
 package cz.cvut.fel.wpa.tracker.service;
 
+import cz.cvut.fel.wpa.tracker.dto.CustomerDto;
 import cz.cvut.fel.wpa.tracker.dto.IssueDto;
+import cz.cvut.fel.wpa.tracker.dto.UserDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -23,20 +25,20 @@ public interface IssueService {
     /**
      * Get all issues participated by the given user
      *
-     * @param userId identifier of user
+     * @param user DTO
      * @return users issues
      */
     @Transactional(readOnly = true)
-    public List<IssueDto> getUserIssues(Long userId);
+    public List<IssueDto> getUserIssues(UserDto user);
 
     @Transactional(readOnly = true)
-    public List<IssueDto> getUserLastIssues(Long userId, int count);
+    public List<IssueDto> getUserLastIssues(UserDto userId, int count);
 
     @Transactional(readOnly = true)
     public List<IssueDto> getProductIssues(Long productId);
 
     @Transactional(readOnly = true)
-    public List<IssueDto> getCustomerIssues(Long customerId);
+    public List<IssueDto> getCustomerIssues(CustomerDto customer);
 
     public IssueDto getIssueById(Long id);
 
