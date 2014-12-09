@@ -26,6 +26,14 @@ public class ProductDto extends  AbstractDto{
         this.issues = issues;
     }
 
+    public List<Long> getIssues() {
+        return issues;
+    }
+
+    public void setIssues(List<Long> issues) {
+        this.issues = issues;
+    }
+
     public String getName() {
         return name;
     }

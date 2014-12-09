@@ -60,13 +60,13 @@ public class ProductServiceImpl extends AbstractDataAccessService implements Pro
         product.setSla(productDto.getSla());
         product.setState(productDto.isState());
 
-        // TODO: ProductDTO nemá možnost získávat Issues?
-//        List<Issue> issueList = new ArrayList<Issue>();
-//        if (productDto.getIssues() != null) {
-//            for (Long issue : userDto.getIssues()) {
-//                issueList.add(genericDao.getById(issue, Issue.class));
-//            }
-//        }
+        List<Issue> issueList = new ArrayList<Issue>();
+        if (productDto.getIssues() != null) {
+            for (Long issue : productDto.getIssues()) {
+                issueList.add(genericDao.getById(issue, Issue.class));
+            }
+        }
+        product.setIssues(issueList);
 
         return genericDao.saveOrUpdate(product).getId();
     }
