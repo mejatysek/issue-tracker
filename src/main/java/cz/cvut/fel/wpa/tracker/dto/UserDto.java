@@ -14,22 +14,23 @@ public class UserDto extends AbstractDto{
     private List<Long> issues;
     private List<Long> operations;
     private List<Long> customers;
-
+    private Long role;
 
     public UserDto() {
     }
 
-    public UserDto(Long id, String userName, boolean state, String email, List<Long> issues, List<Long> operations) {
+    public UserDto(Long id, String userName, boolean state, Long role, String email, List<Long> issues, List<Long> operations) {
         this.id = id;
         this.userName = userName;
         this.state = state;
         this.email = email;
         this.issues = issues;
         this.operations = operations;
+        this.role = role;
     }
 
-    public UserDto(Long id,String userName, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers) {
-        this(id, userName, state, email, issues, operations);
+    public UserDto(Long id, String userName, boolean state, Long role, String email, List<Long> issues, List<Long> operations, List<Long> customers) {
+        this(id, userName, state, role, email, issues, operations);
         this.customers = customers;
     }
 
@@ -78,4 +79,13 @@ public class UserDto extends AbstractDto{
     public void setCustomers(List<Long> customers) {
         this.customers = customers;
     }
+
+    public Long getRole() {
+        return role;
+    }
+
+    public void setRole(Long role) {
+        this.role = role;
+    }
+
 }

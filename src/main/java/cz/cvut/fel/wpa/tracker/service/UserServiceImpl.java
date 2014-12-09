@@ -1,9 +1,7 @@
 package cz.cvut.fel.wpa.tracker.service;
 
-import cz.cvut.fel.wpa.tracker.bo.Customer;
-import cz.cvut.fel.wpa.tracker.bo.Issue;
-import cz.cvut.fel.wpa.tracker.bo.Operation;
-import cz.cvut.fel.wpa.tracker.bo.User;
+import cz.cvut.fel.wpa.tracker.bo.*;
+import cz.cvut.fel.wpa.tracker.dto.RoleDto;
 import cz.cvut.fel.wpa.tracker.dto.UserDto;
 import cz.cvut.fel.wpa.tracker.helper.DtoTransformerHelper;
 import org.springframework.stereotype.Component;
@@ -15,32 +13,32 @@ import java.util.List;
  * Created by mejty on 16.11.14.
  */
 @Component
-public class UserServiceImp extends AbstractDataAccessService implements UserService {
+public class UserServiceImpl extends AbstractDataAccessService implements UserService {
 
 
     @Override
-    public Long addUser(String userName, String password, boolean state, String email) {
-        return addUser(userName, password, state, email, null);
+    public Long addUser(String userName, String password, boolean state, Long role, String email) {
+        return addUser(userName, password, state, role, email, null);
     }
 
     @Override
-    public Long addUser(String userName, String password, boolean state, String email, List<Long> issues) {
-        return addUser(userName, password, state, email, issues, null);
+    public Long addUser(String userName, String password, boolean state, Long role, String email, List<Long> issues) {
+        return addUser(userName, password, state, role, email, issues, null);
     }
 
     @Override
-    public Long addUser(String userName, String password, boolean state, String email, List<Long> issues, List<Long> operations) {
-        return addUser(userName, password, state, email, issues, operations, null);
+    public Long addUser(String userName, String password, boolean state, Long role, String email, List<Long> issues, List<Long> operations) {
+        return addUser(userName, password, state, role, email, issues, operations, null);
     }
 
     @Override
-    public Long addUser(String userName, String password, boolean state, String email, List<Long> issues, List<Long> operations, List<Long> customers) {
+    public Long addUser(String userName, String password, boolean state, Long role, String email, List<Long> issues, List<Long> operations, List<Long> customers) {
         User u = new User();
         u.setUserName(userName);
         u.setState(state);
         u.setEmail(email);
         u.setPassword(password);
-
+        u.setRole(genericDao.getById(role, Role.class));
         List<Issue> issueList = new ArrayList<Issue>();
         if (issues != null) {
             for (Long issue : issues) {
@@ -154,8 +152,20 @@ public class UserServiceImp extends AbstractDataAccessService implements UserSer
         return list;
     }
 
+    @Override
+    public List<UserDto> getUserByRole(RoleDto role) {
+        List<UserDto> list = new ArrayList<UserDto>();
+        List<User> users = genericDao.getByProperty("role", role.getId(), User.class);
+        if (users != null) {
+            for (User u : users) {
+                list.add(dtoFromBo(u));
+            }
+        }
+        return list;
+    }
+
     private UserDto dtoFromBo(User user) {
-        return new UserDto(user.getId(), user.getUserName(), user.isState(), user.getEmail(), DtoTransformerHelper.getIdentifiers(user.getIssues()), DtoTransformerHelper.getIdentifiers(user.getOperations()), DtoTransformerHelper.getIdentifiers(user.getCustomers()));
+        return new UserDto(user.getId(), user.getUserName(), user.isState(), user.getRole().getId(), user.getEmail(), DtoTransformerHelper.getIdentifiers(user.getIssues()), DtoTransformerHelper.getIdentifiers(user.getOperations()), DtoTransformerHelper.getIdentifiers(user.getCustomers()));
     }
 
 }

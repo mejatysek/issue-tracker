@@ -15,6 +15,9 @@ public class UserServiceImplTest extends AbstractServiceTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleService roleService;
+
     @Test
     public void testAddAndRetrieveUser() {
 
@@ -22,13 +25,15 @@ public class UserServiceImplTest extends AbstractServiceTest {
         String passwd = "passwd";
         boolean state = true;
         String email = "abc@abd.cz";
+        Long role = roleService.addRole("test");
 
-        Long id = userService.addUser(userName, passwd, state, email);
+        Long id = userService.addUser(userName, passwd, state, role, email);
         UserDto userDto = userService.getUserById(id);
 
         assertEquals(userName, userDto.getUserName());
         assertEquals(state, userDto.getState());
         assertEquals(email, userDto.getEmail());
+        assertEquals(role, userDto.getRole());
 
     }
 
@@ -39,16 +44,21 @@ public class UserServiceImplTest extends AbstractServiceTest {
         String passwd = "passwd";
         boolean state = true;
         String email = "abc@abd.cz";
+        Long role = roleService.addRole("test");
 
-        Long id = userService.addUser(userName, passwd, state, email);
+        Long id = userService.addUser(userName, passwd, state, role, email);
         UserDto userDto = userService.getUserById(id);
         assertEquals(1, userService.getAllUsers().size());
+        assertEquals(userDto, userService.getAllUsers().get(0));
         assertEquals(1, userService.getUserByState(true).size());
+        assertEquals(userDto, userService.getUserByState(true).get(0));
         assertEquals(0, userService.getUserByState(false).size());
         userService.deactivateUser(id);
         assertEquals(1, userService.getAllUsers().size());
+        assertEquals(userDto, userService.getAllUsers().get(0));
         assertEquals(0, userService.getUserByState(true).size());
         assertEquals(1, userService.getUserByState(false).size());
+        assertEquals(userDto, userService.getUserByState(false).get(0));
     }
 
     @Test
@@ -58,21 +68,25 @@ public class UserServiceImplTest extends AbstractServiceTest {
         String passwd = "passwd";
         boolean state = true;
         String email = "abc@abd.cz";
+        Long role = roleService.addRole("test");
 
-        Long id = userService.addUser(userName, passwd, state, email);
+        Long id = userService.addUser(userName, passwd, state, role, email);
         UserDto userDto = userService.getUserById(id);
         assertEquals(userName, userDto.getUserName());
         assertEquals(state, userDto.getState());
         assertEquals(email, userDto.getEmail());
+        assertEquals(role, userDto.getRole());
 
         String changedEmail = "abder@bdc.cz";
         userDto.setEmail(changedEmail);
         userService.editUser(userDto);
         userDto = userService.getUserById(id);
 
+        assertEquals(id, userDto.getId());
         assertEquals(userName, userDto.getUserName());
         assertEquals(state, userDto.getState());
         assertEquals(changedEmail, userDto.getEmail());
+        assertEquals(role, userDto.getRole());
         assertEquals(1, userService.getAllUsers().size());
 
         }
@@ -84,8 +98,9 @@ public class UserServiceImplTest extends AbstractServiceTest {
         String passwd = "passwd";
         boolean state = true;
         String email = "abc@abd.cz";
+        Long role = roleService.addRole("test");
 
-        Long id = userService.addUser(userName, passwd, state, email);
+        Long id = userService.addUser(userName, passwd, state, role, email);
         UserDto userDto = userService.getUserById(id);
         assertEquals(1,userService.getUserByUsername(userName).size());
         assertEquals(userName, userDto.getUserName());
