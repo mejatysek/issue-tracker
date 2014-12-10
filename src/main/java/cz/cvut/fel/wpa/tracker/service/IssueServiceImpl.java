@@ -35,20 +35,31 @@ public class IssueServiceImpl extends AbstractDataAccessService implements Issue
 
     @Override
     public List<IssueDto> getUserIssues(UserDto user) {
-        List<IssueDto> issuesDtos = new ArrayList<IssueDto>();
-        List<Long> issues = user.getIssues();
-        if (issues != null) {
-            for (Long issue : issues) {
-                issuesDtos.add(dtoFromBo(genericDao.getById(issue, Issue.class)));
-            }
-        }
-        return issuesDtos;
+        return getUserLastIssues(user, 0);
     }
 
     @Override
     public List<IssueDto> getUserLastIssues(UserDto userId, int count) {
-//        TODO: nemam poneti jak na to
-        return null;
+        List<IssueDto> issueDtos = new ArrayList<IssueDto>();
+        List<Issue> list;
+
+        if (count > 0) {
+            list = genericDao.getByPropertyOrderedDesc("owner", userId, "time", Issue.class);
+        }else{
+            list = genericDao.getByProperty("owner", userId, Issue.class);
+        }
+
+        if (list != null) {
+            int counter = 0;
+            for (Issue issue : list) {
+                if (count > 0 && counter >= count) break;
+                issueDtos.add(dtoFromBo(issue));
+
+                counter++;
+            }
+        }
+
+        return issueDtos;
     }
 
     @Override
