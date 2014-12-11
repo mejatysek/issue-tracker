@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0" 
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+    <application>
+        <!--This is needed if using spring beans in the EL expressions--> 
+        <!--TODO link na dokumentace-->
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        
+        <!--Localization configuration-->
+        <!--defin the default and the supported locales.-->
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>cs_CZ</supported-locale>
+        </locale-config>
+        <!--create a resource bundle -->
+        <resource-bundle>
+            <base-name>cz.cvut.fel.wpa.tracker.pres.inter.tracker</base-name>
+            <var>msg</var>
+        </resource-bundle>
+    </application>
+</faces-config>
