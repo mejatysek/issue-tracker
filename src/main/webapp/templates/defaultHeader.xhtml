@@ -3,11 +3,20 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
         >
 <body>
 <ui:composition>
 
-    <h1>This is default header</h1>
+    <p:menubar>
+       <p:menuitem value="#{msg['header.Issues']}" url="/issues.xhtml" icon="ui-icon-folder-collapsed" />
+       <p:menuitem value="#{msg['header.Customers']}" url="/customers.xhtml" icon="ui-icon-suitcase" />
+       <p:menuitem value="#{msg['header.Users']}" url="/users.xhtml" icon="ui-icon-person" />
+
+        <f:facet name="options">
+            <p:commandButton type="button" value="#{msg['header.Logout']}" icon="ui-icon-extlink" />
+        </f:facet>
+    </p:menubar>
 
 </ui:composition>
 </body>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
+      xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
+
+<h:body>
+
+    <ui:composition template="/templates/layout.xhtml">
+
+        <ui:define name="content">
+            <h2>Issues <a href="/issue/add.xhtml" class="btn btn-primary">Add issue</a> </h2>
+            <!--TODO: Nemá smysl začínát Issues, nejdřív všechno ostatní a Issues jako poslední-->
+            <p:panel>
+                <h:form>
+                    <p:growl/>
+                    <p:dataTable var="issue" value="#{issueBean.issues}">
+                        <p:column headerText="Product">
+                            <h:outputText value="#{issue.product}"/>
+                        </p:column>
+                        <p:column headerText="State">
+                            <h:outputText value="#{issue.state}"/>
+                        </p:column>
+                        <p:column headerText="Last user">
+                            <h:outputText value="#{issue.operation}"/>
+                        </p:column>
+                        <p:column headerText="">
+                            <h:outputText value="#{issue.state}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:panel>
+        </ui:define>
+
+    </ui:composition>
+</h:body>
+</html>
