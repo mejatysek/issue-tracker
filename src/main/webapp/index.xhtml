@@ -7,16 +7,17 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:body>
-
-    <ui:composition template="/WEB-INF/templates/layout.xhtml">
-
-        <ui:define name="content">
-            <h2>This is page1 content</h2>
-        </ui:define>
-
-    </ui:composition>
-
-</h:body>
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title>Book store</title>
+        </h:head>
+        <h:body>
+            <h1><h:outputText value="#{msg['bookstore-welcome.title']}"/></h1>
+            <!--<p:panel>-->
+                <!--<p:link outcome="user-list" value="users"/><br/>-->
+                <!--<p:link outcome="register" value="register"/>-->
+            <!--</p:panel>-->
+        </h:body>
+    </f:view>
 </html>
