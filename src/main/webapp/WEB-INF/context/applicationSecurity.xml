@@ -21,8 +21,8 @@
         <intercept-url pattern="/javax.faces.resource/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/login.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <!--pro vypnuti securyty odkomentovat-->
-        <!--<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
-        <!--<intercept-url pattern="/customer/**" access="ROLE_SALESMAN" />-->
+        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <intercept-url pattern="/customer/**" access="ROLE_SALESMAN" />
         <intercept-url pattern="/user/**" access="ROLE_ADMIN" />
         <intercept-url pattern="/**" access="ROLE_USER" />
         <logout invalidate-session="true" delete-cookies="true" logout-success-url="/login.xhtml" />
