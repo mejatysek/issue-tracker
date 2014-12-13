@@ -70,7 +70,15 @@ public class AuthenticationService extends AbstractUserDetailsAuthenticationProv
                         throw e;
                     } else {
                         List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
-                        auths.add(new SimpleGrantedAuthority("ROLE_"+u.getRole().getName()));
+//                        auths.add(new SimpleGrantedAuthority("ROLE_"+u.getRole().getName()));
+                            auths.add(new SimpleGrantedAuthority("ROLE_USER"));
+                            if(u.getRole().getName().equals("ADMIN")){
+                                auths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                                auths.add(new SimpleGrantedAuthority("ROLE_SALESMAN"));
+                            }
+                        if(u.getRole().getName().equals("SALESMAN")){
+                            auths.add(new SimpleGrantedAuthority("ROLE_SALESMAN"));
+                        }
                         ud = new User(u.getUserName(), u.getPassword(), auths);
                     }
                     return ud;
