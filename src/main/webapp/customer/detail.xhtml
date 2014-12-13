@@ -17,7 +17,7 @@
     <ui:composition template="/templates/layout.xhtml">
 
         <ui:define name="content">
-            <h2><h:outputText value="#{customerBean.name}"/> &nbsp;<h:link outcome="/customer/add" styleClass="btn-primary btn">Add product</h:link> </h2>
+            <h2><h:outputText value="#{customerBean.name}"/> &nbsp;<h:link outcome="/product/add" value="Add product" styleClass="btn-primary btn"><f:param name="customerId" value="#{customerBean.id}" /></h:link> </h2>
 
             <div class="row">
                 <div class="col-md-4">
