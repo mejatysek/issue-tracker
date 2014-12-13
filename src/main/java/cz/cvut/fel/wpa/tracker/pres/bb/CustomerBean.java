@@ -1,7 +1,9 @@
 package cz.cvut.fel.wpa.tracker.pres.bb;
 
 import cz.cvut.fel.wpa.tracker.dto.CustomerDto;
+import cz.cvut.fel.wpa.tracker.dto.ProductDto;
 import cz.cvut.fel.wpa.tracker.service.CustomerService;
+import cz.cvut.fel.wpa.tracker.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -21,11 +23,16 @@ public class CustomerBean {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private ProductService productService;
+
     private Long id;
 
     private String name;
     private String email;
     private String defaultSla;
+
+    private List<ProductDto> products;
 
     private List<CustomerDto> customers;
     private boolean customersState;
@@ -52,6 +59,20 @@ public class CustomerBean {
         customerService.deactivateCustomer(id);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+
+        CustomerDto customerDto = customerService.getCustomerById(id);
+        name = customerDto.getName();
+        email = customerDto.getEmail();
+        defaultSla = customerDto.getSla();
+        products = productService.getCustomerProducts(id);
+    }
+
     public String getName() {
         return name;
     }
@@ -74,5 +95,13 @@ public class CustomerBean {
 
     public void setDefaultSla(String defaultSla) {
         this.defaultSla = defaultSla;
+    }
+
+    public List<ProductDto> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductDto> products) {
+        this.products = products;
     }
 }
