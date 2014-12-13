@@ -46,10 +46,10 @@ public class LoginBean {
     }
 
     public String logout() {
+       // FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Loged out", null));
         SecurityContextHolder.getContext().setAuthentication(null);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Loged out", "loged out."));
-        return "login";
+        return "login?faces-redirect=true";
     }
 
     public void setPassword(String password) {
