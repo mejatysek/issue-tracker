@@ -41,13 +41,14 @@ public class LoginBean {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Invalid credentials!", "The username/password combination is not valid."));
             return "login";
         }
-
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Login ok", "login ok."));
         return "issues?faces-redirect=true";
     }
 
     public String logout() {
         SecurityContextHolder.getContext().setAuthentication(null);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Loged out", "loged out."));
         return "login";
     }
 
@@ -67,50 +68,4 @@ public class LoginBean {
         this.username = username;
     }
 }
-//@Component("loginBean")
-//@Scope("session")
-//public class LoginBean {
-//
-//    private String username;
-//
-//    private String password;
-//
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
-//
-//    public String login() {
-//        Authentication request = new UsernamePasswordAuthenticationToken(username, password);
-//        try {
-//            Authentication result = authenticationManager.authenticate(request);
-//            SecurityContextHolder.getContext().setAuthentication(result);
-//        } catch (org.springframework.security.core.AuthenticationException e) {
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Invalid credentials!", "The username/password combination is not valid."));
-//            return "login";
-//        }
-//
-//        return "issues?faces-redirect=true";
-//    }
-//
-//    public String logout() {
-//        SecurityContextHolder.getContext().setAuthentication(null);
-//        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
-//        return "login?faces-redirect=true";
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-//}
 
