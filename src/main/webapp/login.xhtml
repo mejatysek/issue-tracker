@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Issue tracker</title>
+    </h:head>
+    <h:body>
+        <h1>Issue tracker Login:</h1>
+        <h:form prependId="false">
+            <p:panel>
+                <p:messages id="messages" />
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="j_username" value="Username:" />
+                    <p:inputText id="j_username" required="true" value="#{loginBean.username}" />
+
+                    <h:outputLabel for="j_password" value="Password:" />
+                    <p:password id="j_password" required="true" value="#{loginBean.password}" />
+                    <p:spacer />
+                    <p:commandButton type="submit" value="Submit" action="#{loginBean.login()}" ajax="false" />
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</f:view>
+</html>
