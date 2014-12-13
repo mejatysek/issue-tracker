@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
       xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
 
 <h:body>
@@ -23,10 +24,15 @@
                         <p:column headerText="Email">
                             <h:outputText value="#{user.email}"/>
                         </p:column>
+                        <p:column headerText="Role">
+                            <h:outputText value="#{userBean.getRole(user.role).getName()}"/>
+                        </p:column>
                         <p:column headerText="State">
-                            <h:outputText value="#{user.state}"/>
+                            <h:outputText value="Active" rendered="#{user.state}"/>
+                            <h:outputText value="Deactivated" rendered="#{not user.state}"/>
                         </p:column>
                         <p:column headerText="">
+                            <h:commandLink rendered="#{user.state}" action="#{userBean.deactivateUser(user.id)}" value="Deactivate user"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>
