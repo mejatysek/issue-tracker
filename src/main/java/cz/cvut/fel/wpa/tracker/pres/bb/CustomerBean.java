@@ -3,6 +3,7 @@ package cz.cvut.fel.wpa.tracker.pres.bb;
 import cz.cvut.fel.wpa.tracker.dto.CustomerDto;
 import cz.cvut.fel.wpa.tracker.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ViewScoped;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 
 @Component("customerBean")
-@ViewScoped
+@Scope("request")
 public class CustomerBean {
 
     @Autowired
@@ -44,6 +45,11 @@ public class CustomerBean {
         }
 
         return customers;
+    }
+
+    public void deactivateCustomer(Long id) {
+        customers = null;
+        customerService.deactivateCustomer(id);
     }
 
     public String getName() {

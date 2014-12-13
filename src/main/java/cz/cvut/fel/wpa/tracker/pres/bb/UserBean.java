@@ -16,7 +16,7 @@ import java.util.List;
  * Date: 13.12.14
  */
 @Component("userBean")
-@ViewScoped
+@Scope("request")
 public class UserBean {
 
     @Autowired
@@ -50,7 +50,10 @@ public class UserBean {
 
     public RoleDto getRole(Long id){ return roleService.getRoleById(id); }
 
-    public void deactivateUser(Long id) { userService.deactivateUser(id); }
+    public void deactivateUser(Long id) {
+        users = null;
+        userService.deactivateUser(id);
+    }
 
     public List<RoleDto> getRoles(){ return roleService.getAllRoles(); }
 
