@@ -30,6 +30,10 @@ public class ProductBean {
             return "fail";
     }
 
+    public void deactivateProduct(Long id){
+        productService.deactivateProduct(id);
+    }
+
     public String getName() {
         return name;
     }

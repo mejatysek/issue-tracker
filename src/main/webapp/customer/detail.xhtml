@@ -9,7 +9,7 @@
       xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
 
 <f:metadata>
-    <f:viewParam name="id" value="#{customerBean.id}"/>
+    <f:viewParam name="id" value="#{customerBean.detailId}"/>
 </f:metadata>
 
 <h:body>
@@ -17,7 +17,15 @@
     <ui:composition template="/templates/layout.xhtml">
 
         <ui:define name="content">
-            <h2><h:outputText value="#{customerBean.name}"/> &nbsp;<h:link outcome="/product/add" value="Add product" styleClass="btn-primary btn"><f:param name="customerId" value="#{customerBean.id}" /></h:link> </h2>
+            <h2>
+                <h:outputText value="#{customerBean.name}"/> &nbsp;
+                <h:link styleClass="btn btn-success" outcome="/customer/edit" value="Edit"><f:param name="id" value="#{customerBean.id}"/> </h:link>&nbsp;
+                <h:form style="display: inline">
+                    <h:commandLink rendered="#{customerBean.state}" action="#{customerBean.deactivateCustomer(customerBean.id)}" styleClass="btn btn-warning" value="Deactivate"/>&nbsp;
+                </h:form>
+
+
+            </h2>
 
             <div class="row">
                 <div class="col-md-4">
@@ -30,8 +38,9 @@
                     </dl>
                 </div>
                 <div class="col-md-8">
-                    <h3>Products</h3>
+                    <h3>Products <h:link outcome="/product/add" value="Add product" styleClass="btn-primary btn"><f:param name="customerId" value="#{customerBean.id}" /></h:link></h3>
 
+                    <!--TODO: Product detail s výpisem napojených issues -->
                     <p:panel>
                         <h:form>
                             <p:growl/>
@@ -46,11 +55,7 @@
                                     <h:outputText value="#{product.price}"/>
                                 </p:column>
                                 <p:column headerText="">
-                                    <h:commandLink rendered="#{price.state}" action="#{customerBean.deactivateCustomer(customer.id)}" value="Deactivate"/>
-                                    |
-                                    <h:link value="Detail" outcome="/product/detail">
-                                        <f:param name="id" value="#{product.id}"/>
-                                    </h:link>
+                                    <h:commandLink rendered="#{product.state}" action="#{productBean.deactivateProduct(product.id)}" value="Deactivate"/>
                                 </p:column>
                             </p:dataTable>
                         </h:form>

@@ -25,11 +25,15 @@
                             <h:outputText value="#{customer.email}"/>
                         </p:column>
                         <p:column headerText="">
-                            <h:commandLink rendered="#{customer.state}" action="#{customerBean.deactivateCustomer(customer.id)}" value="Deactivate"/>
-                            |
                             <h:link value="Detail" outcome="/customer/detail">
                                 <f:param name="id" value="#{customer.id}"/>
                             </h:link>
+                            |
+                            <h:link value="Edit" outcome="/customer/edit">
+                                <f:param name="id" value="#{customer.id}"/>
+                            </h:link>
+                            |
+                            <h:commandLink rendered="#{customer.state}" action="#{customerBean.deactivateCustomer(customer.id)}" value="Deactivate"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

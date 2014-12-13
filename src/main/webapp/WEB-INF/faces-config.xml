@@ -9,7 +9,6 @@
 
     <application>
         <!--This is needed if using spring beans in the EL expressions--> 
-        <!--TODO link na dokumentace-->
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
         
         <!--Localization configuration-->

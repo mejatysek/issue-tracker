@@ -27,10 +27,12 @@ public class CustomerBean {
     private ProductService productService;
 
     private Long id;
+    private Long detailId;
 
     private String name;
     private String email;
     private String defaultSla;
+    private boolean state;
 
     private List<ProductDto> products;
 
@@ -45,6 +47,19 @@ public class CustomerBean {
             return "fail";
     }
 
+    public String editCustomer(){
+        CustomerDto customerDto = customerService.getCustomerById(id);
+
+        customerDto.setEmail(email);
+        customerDto.setName(name);
+        customerDto.setSla(defaultSla);
+
+        if((id = customerService.editCustomer(customerDto)) != null)
+            return "success?faces-redirect=true&includeViewParams=true";
+        else
+            return "fail";
+    }
+
     public List<CustomerDto> getCustomers(boolean showActive) {
         if (customers == null || customersState != showActive) {
             customersState = showActive;
@@ -54,9 +69,10 @@ public class CustomerBean {
         return customers;
     }
 
-    public void deactivateCustomer(Long id) {
+    public String deactivateCustomer(Long id) {
         customers = null;
         customerService.deactivateCustomer(id);
+        return "/customers";
     }
 
     public Long getId() {
@@ -65,12 +81,6 @@ public class CustomerBean {
 
     public void setId(Long id) {
         this.id = id;
-
-        CustomerDto customerDto = customerService.getCustomerById(id);
-        name = customerDto.getName();
-        email = customerDto.getEmail();
-        defaultSla = customerDto.getSla();
-        products = productService.getCustomerProducts(id);
     }
 
     public String getName() {
@@ -103,5 +113,30 @@ public class CustomerBean {
 
     public void setProducts(List<ProductDto> products) {
         this.products = products;
+    }
+
+    public Long getDetailId() {
+        return detailId;
+    }
+
+    public void setDetailId(Long detailId) {
+        this.detailId = detailId;
+        this.id = detailId;
+
+        CustomerDto customerDto = customerService.getCustomerById(id);
+        name = customerDto.getName();
+        email = customerDto.getEmail();
+        defaultSla = customerDto.getSla();
+        state = customerDto.isState();
+        // TODO: Filtrování Produktů podle toho jestli jsou aktivní nebo ne
+        products = productService.getCustomerProducts(id);
+    }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
     }
 }
