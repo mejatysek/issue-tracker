@@ -42,7 +42,7 @@ public class LoginBean {
             return "login";
         }
 
-        return "book-store-welcome-page?faces-redirect=true";
+        return "issues?faces-redirect=true";
     }
 
     public String logout() {
