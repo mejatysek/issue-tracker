@@ -141,9 +141,6 @@ public class User extends AbstractBusinessObject {
         role.adduser(this);
     }
     public boolean hasPassword(String password){
-        if(hashProvider.computeHash(password + salt).equals(this.password)){
-            return true;
-        }
-        return false;
+        return SHA1Provider.computeHash(password + salt).equals(this.password);
     }
 }
