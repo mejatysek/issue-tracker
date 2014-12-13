@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.faces.bean.ViewScoped;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
  * Date: 13.12.14
  */
 @Component("userBean")
-@Scope("request")
+@ViewScoped
 public class UserBean {
 
     @Autowired
@@ -32,6 +33,8 @@ public class UserBean {
 
     private String password;
 
+    private List<UserDto> users;
+
     public String addUser(){
         if(userService.addUser(userName, password, true, roleId, email) != null)
             return "success";
@@ -39,7 +42,11 @@ public class UserBean {
             return "fail";
     }
 
-    public List<UserDto> getUsers() { return userService.getAllUsers(); }
+    public List<UserDto> getUsers() {
+        if (users == null ) users = userService.getAllUsers();
+
+        return users;
+    }
 
     public RoleDto getRole(Long id){ return roleService.getRoleById(id); }
 
