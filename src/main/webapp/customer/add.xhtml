@@ -4,16 +4,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
 
 <h:body>
 
     <ui:composition template="/templates/layout.xhtml">
 
         <ui:define name="content">
-            <h2>This is issueList content</h2>
+            <h2>Add customer</h2>
+
+            <h:form>
+                <div class="row mb20">
+                    <div class="col-md-4">
+                        <div class="mb20">
+                            <p:inputText placeholder="Name" id="name" required="true" requiredMessage="Please enter name."  value="#{customerBean.name}" />
+                            <p:message for="name"/>
+                        </div>
+                        <div class="mb20">
+
+                            <p:inputText placeholder="Email"  required="true" requiredMessage="Please enter email."  id="email" value="#{customerBean.email}">
+                                <!--<f:validator validatorId="cz.cvut.fel.wpa.tracker.pres.validator.EmailValidator"/>-->
+                            </p:inputText>
+                            <p:message for="email"/>
+                        </div>
+                        <div>
+                            <p:inputText required="true" requiredMessage="Please enter default SLA."  placeholder="Default SLA" id="default_sla" value="#{customerBean.defaultSla}">
+                            </p:inputText>
+                            <p:message for="default_sla"/>
+                        </div>
+                    </div>
+                </div>
+                <h:commandButton styleClass="btn btn-primary" action="#{customerBean.addCustomer()}" value="Add customer" />
+            </h:form>
+
         </ui:define>
 
     </ui:composition>
+
 </h:body>
 </html>

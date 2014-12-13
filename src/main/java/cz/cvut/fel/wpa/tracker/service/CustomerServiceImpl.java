@@ -5,6 +5,7 @@ import cz.cvut.fel.wpa.tracker.bo.Product;
 import cz.cvut.fel.wpa.tracker.bo.User;
 import cz.cvut.fel.wpa.tracker.dto.CustomerDto;
 import cz.cvut.fel.wpa.tracker.helper.DtoTransformerHelper;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * Author: Adam Uhlíř <uhlir.a@gmail.com>
  * Date: 10.12.14
  */
+@Component
 public class CustomerServiceImpl extends AbstractDataAccessService implements CustomerService {
     @Override
     public List<CustomerDto> getAllCustomer() {
@@ -86,6 +88,7 @@ public class CustomerServiceImpl extends AbstractDataAccessService implements Cu
         customer.setEmail(customerDto.getEmail());
         customer.setState(customerDto.isState());
         customer.setSla(customerDto.getSla());
+        customer.setUser(genericDao.getById(customerDto.getUser(), User.class));
         
         List<Product> products = new ArrayList<Product>();
         if (customerDto.getProducts() != null) {
