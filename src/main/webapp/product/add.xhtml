@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
+
+<f:metadata>
+    <f:viewParam name="customerId" value="#{productBean.customerId}" />
+</f:metadata>
+
+<h:body>
+
+    <ui:composition template="/templates/layout.xhtml">
+
+        <ui:define name="content">
+            <h2>Add product</h2>
+
+            <h:form>
+                <div class="row mb20">
+                    <div class="col-md-6">
+                        <div class="mb20">
+                            <p:inputText placeholder="Name" id="name" required="true" requiredMessage="Please enter name of product."  value="#{productBean.name}" >
+                                <f:validateLength minimum="4"  />
+                            </p:inputText>
+                            <p:message for="name"/>
+                        </div>
+                        <div class="mb20">
+                            <!--TODO: Dodělat vyplnění defaultního SLA od Customera-->
+                            <p:inputText placeholder="SLA"  required="true" requiredMessage="Please enter SLA."  id="sla" value="#{productBean.sla}" />
+                            <p:message for="sla"/>
+                        </div>
+                        <div>
+                            <p:inputText required="true" requiredMessage="Please enter price."  placeholder="Price" id="price" value="#{productBean.price}" />
+                            <p:message for="price"/>
+                        </div>
+                    </div>
+                </div>
+                <h:commandButton styleClass="btn btn-primary" action="#{productBean.addProduct()}" value="Add product" />
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+</html>

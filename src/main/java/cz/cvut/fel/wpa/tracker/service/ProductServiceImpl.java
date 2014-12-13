@@ -34,7 +34,7 @@ public class ProductServiceImpl extends AbstractDataAccessService implements Pro
     @Override
     public List<ProductDto> getCustomerProducts(Long customerId) {
         List<ProductDto> list = new ArrayList<ProductDto>();
-        List<Product> relations = genericDao.getByProperty("customer", customerId, Product.class);
+        List<Product> relations = genericDao.getByProperty("customer", genericDao.getById(customerId, Customer.class), Product.class);
         if (relations != null) {
             for (Product u : relations) {
                 list.add(dtoFromBo(u));

@@ -4,16 +4,67 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
+
+<f:metadata>
+    <f:viewParam name="id" value="#{customerBean.detailId}"/>
+</f:metadata>
 
 <h:body>
 
     <ui:composition template="/templates/layout.xhtml">
 
         <ui:define name="content">
-            <h2>This is issueList content</h2>
+            <h2>
+                <h:outputText value="#{customerBean.name}"/> &nbsp;
+                <h:link styleClass="btn btn-success" outcome="/customer/edit" value="Edit"><f:param name="id" value="#{customerBean.id}"/> </h:link>&nbsp;
+                <h:form style="display: inline">
+                    <h:commandLink rendered="#{customerBean.state}" action="#{customerBean.deactivateCustomer(customerBean.id)}" styleClass="btn btn-warning" value="Deactivate"/>&nbsp;
+                </h:form>
+
+
+            </h2>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Informations</h3>
+                    <dl class="dl-horizontal">
+                        <dt>Email: </dt>
+                        <dd><h:outputText value="#{customerBean.email}"/></dd>
+                        <dt>Default SLA: </dt>
+                        <dd><h:outputText value="#{customerBean.defaultSla}"/> </dd>
+                    </dl>
+                </div>
+                <div class="col-md-8">
+                    <h3>Products <h:link outcome="/product/add" value="Add product" styleClass="btn-primary btn"><f:param name="customerId" value="#{customerBean.id}" /></h:link></h3>
+
+                    <!--TODO: Product detail s výpisem napojených issues -->
+                    <p:panel>
+                        <h:form>
+                            <p:growl/>
+                            <p:dataTable var="product" widgetVar="productTable" value="#{customerBean.getProducts()}">
+                                <p:column headerText="Name" sortBy="#{product.name}">
+                                    <h:outputText value="#{product.name}"/>
+                                </p:column>
+                                <p:column headerText="SLA" sortBy="#{product.sla}">
+                                    <h:outputText value="#{product.sla}"/>
+                                </p:column>
+                                <p:column headerText="Price" sortBy="#{product.price}">
+                                    <h:outputText value="#{product.price}"/>
+                                </p:column>
+                                <p:column headerText="">
+                                    <h:commandLink rendered="#{product.state}" action="#{productBean.deactivateProduct(product.id)}" value="Deactivate"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:panel>
+                </div>
+            </div>
         </ui:define>
 
     </ui:composition>
+
 </h:body>
 </html>
