@@ -5,6 +5,7 @@ import cz.cvut.fel.wpa.tracker.bo.Issue;
 import cz.cvut.fel.wpa.tracker.bo.Product;
 import cz.cvut.fel.wpa.tracker.dto.ProductDto;
 import cz.cvut.fel.wpa.tracker.helper.DtoTransformerHelper;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * Author: Adam Uhlíř <uhlir.a@gmail.com>
  * Date: 8.12.14
  */
+@Component
 public class ProductServiceImpl extends AbstractDataAccessService implements ProductService {
     @Override
     public List<ProductDto> getAllProducts() {
