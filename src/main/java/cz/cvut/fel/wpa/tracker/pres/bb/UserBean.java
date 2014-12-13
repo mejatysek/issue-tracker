@@ -15,7 +15,7 @@ import java.util.List;
  * Date: 13.12.14
  */
 @Component("userBean")
-//@Scope("re")
+@Scope("request")
 public class UserBean {
 
     @Autowired
@@ -24,9 +24,58 @@ public class UserBean {
     @Autowired
     private RoleService roleService;
 
+    protected Long roleId;
+
+    private String userName;
+
+    private String email;
+
+    private String password;
+
+    public String addUser(){
+        if(userService.addUser(userName, password, true, roleId, email) != null)
+            return "success";
+        else
+            return "fail";
+    }
+
     public List<UserDto> getUsers() { return userService.getAllUsers(); }
 
     public RoleDto getRole(Long id){ return roleService.getRoleById(id); }
 
     public void deactivateUser(Long id) { userService.deactivateUser(id); }
+
+    public List<RoleDto> getRoles(){ return roleService.getAllRoles(); }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
 }

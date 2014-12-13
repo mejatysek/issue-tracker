@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
  * SHA1 hash functionprovider
  * @author mickapa1
  */
-@Component("hashProvider")
-public class SHA1Provider implements HashProvider{
+public class SHA1Provider{
     private static String convertToHex(byte[] data) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < data.length; i++) {
@@ -30,8 +29,7 @@ public class SHA1Provider implements HashProvider{
         return builder.toString();
     }
 
-    @Override
-    public String computeHash(String s) {
+    public static String computeHash(String s) {
         MessageDigest md = null;
         byte[] sha1hash = null;
         try {

@@ -2,10 +2,57 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
+
+<h:body>
+
+    <ui:composition template="/templates/layout.xhtml">
+
+        <ui:define name="content">
+            <h2>Add user</h2>
+
+            <h:form>
+                <div class="row mb20">
+                    <div class="col-md-6">
+                        <div class="mb20">
+                            <p:inputText placeholder="Username" id="userName" required="true" requiredMessage="Please enter username."  value="#{userBean.userName}" >
+                                <f:validateLength minimum="4"  />
+                            </p:inputText>
+                            <p:message for="userName"/>
+                        </div>
+                        <div class="mb20">
+
+                            <p:inputText placeholder="Email"  required="true" requiredMessage="Please enter email."  id="email" value="#{userBean.email}">
+                                <f:validator validatorId="cz.cvut.fel.wpa.tracker.pres.validator.EmailValidator"/>
+                            </p:inputText>
+                            <p:message for="email"/>
+                        </div>
+                        <div>
+                            <p:inputText type="password" required="true" requiredMessage="Please enter password."  placeholder="Password" id="password" value="#{userBean.password}">
+                                <f:validateLength minimum="6" />
+                            </p:inputText>
+                            <p:message for="password"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <p:outputLabel for="basic" value="Role:" />
+                        <p:selectOneListbox id="basic" required="true" requiredMessage="Please select role."   value="#{userBean.roleId}">
+                            <f:validateRequired/>
+                            <f:selectItems value="#{userBean.getRoles()}" var="role" itemLabel="#{role.name}" itemValue="#{role.id}" />
+                        </p:selectOneListbox>
+                        <p:message for="basic"/>
+                    </div>
+                </div>
+                <h:commandButton styleClass="btn btn-primary btn-block" action="#{userBean.addUser()}" value="Add user" />
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
 </html>
