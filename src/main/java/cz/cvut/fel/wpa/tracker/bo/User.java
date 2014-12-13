@@ -4,9 +4,10 @@
  */
 package cz.cvut.fel.wpa.tracker.bo;
 
-import cz.cvut.fel.wpa.tracker.provider.HashProvider;
+import cz.cvut.fel.wpa.tracker.provider.SHA1Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -36,26 +37,16 @@ public class User extends AbstractBusinessObject {
     private List<Issue> issues;
     @OneToMany
     private List<Customer> customers;
-    @Autowired
-    private transient HashProvider hashProvider; //transient fields are not persisted
     @ManyToOne
     private Role role;
-
-    public HashProvider getHashProvider() {
-        return hashProvider;
-    }
-
-    public void setHashProvider(HashProvider hashProvider) {
-        this.hashProvider = hashProvider;
-    }
 
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
-        this.salt = hashProvider.computeHash(System.nanoTime() + "");
-        this.password = hashProvider.computeHash(password + salt);
+        this.salt = SHA1Provider.computeHash(System.nanoTime() + "");
+        this.password = SHA1Provider.computeHash(password + salt);
     }
 
     public String getSalt() {
