@@ -1,7 +1,5 @@
 package cz.cvut.fel.wpa.tracker.pres.bb;
 
-import cz.cvut.fel.wpa.tracker.bo.Operation;
-import cz.cvut.fel.wpa.tracker.bo.User;
 import cz.cvut.fel.wpa.tracker.dto.IssueDto;
 import cz.cvut.fel.wpa.tracker.dto.OperationDto;
 import cz.cvut.fel.wpa.tracker.dto.RelationDto;
@@ -12,9 +10,10 @@ import cz.cvut.fel.wpa.tracker.service.RelationService;
 import cz.cvut.fel.wpa.tracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -55,8 +54,10 @@ public class IssueBean {
         short s = 1;
         id = issueService.addIssue(topic, s, productId, null);
 
-        // TODO: Přiřadit aktuální uživatele k Operations
-        operationService.addOperation(new Date(), 1l, id, description);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+        Long userID = userService.getUserByUsername(name).get(0).getId();
+        operationService.addOperation(new Date(), userID, id, description);
 
         return "/issue/detail.xhtml?faces-redirect=true&id=" + id;
     }
