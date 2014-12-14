@@ -4,12 +4,16 @@ import cz.cvut.fel.wpa.tracker.dto.CustomerDto;
 import cz.cvut.fel.wpa.tracker.dto.ProductDto;
 import cz.cvut.fel.wpa.tracker.service.CustomerService;
 import cz.cvut.fel.wpa.tracker.service.ProductService;
+import cz.cvut.fel.wpa.tracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ViewScoped;
 import java.util.List;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * Author: Adam Uhlíř <uhlir.a@gmail.com>
@@ -22,6 +26,9 @@ public class CustomerBean {
 
     @Autowired
     private CustomerService customerService;
+    
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private ProductService productService;
@@ -41,7 +48,11 @@ public class CustomerBean {
 
     public String addCustomer(){
         //TODO: Přidat ID aktuálního uživatele
-        if((id = customerService.addCustomer(name,email,defaultSla, 1l)) != null)
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+         String name = auth.getName(); //get logged in username
+ 
+        Long userID = userService.getUserByUsername(name).get(0).getId();
+        if((id = customerService.addCustomer(name,email,defaultSla, userID)) != null)
             return "/customer/detail.xhtml?faces-redirect=true&id=" + id;
         else
             return null;
