@@ -8,11 +8,17 @@
       xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
 
 <h:body>
+    
+    <ui:composition template="/templates/layout.xhtml">
 
+        <ui:define name="content">
            
             <!--TODO: Nemá smysl začínát Issues, nejdřív všechno ostatní a Issues jako poslední-->
             <p:panel>
                 <h2> Access denied! You have no rights to see this. </h2>
             </p:panel>
+                    </ui:define>
+    </ui:composition>
+
 </h:body>
 </html>

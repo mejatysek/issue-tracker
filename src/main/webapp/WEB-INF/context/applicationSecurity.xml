@@ -28,7 +28,8 @@
         <intercept-url pattern="/customer/**" access="ROLE_SALESMAN" />
         <intercept-url pattern="/user/**" access="ROLE_ADMIN" />
         <intercept-url pattern="/**" access="ROLE_USER" />
-        <logout invalidate-session="true" delete-cookies="true" logout-success-url="/login.xhtml" />
+        <!--<logout invalidate-session="true" delete-cookies="true" logout-success-url="/login.xhtml" />
+    -->
     </http>
 
     <beans:bean id="flexibleAuthenticationProvider" class="cz.cvut.fel.wpa.tracker.service.AuthenticationService">
