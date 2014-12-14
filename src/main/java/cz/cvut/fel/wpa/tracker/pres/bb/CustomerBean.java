@@ -47,10 +47,8 @@ public class CustomerBean {
     private boolean customersState;
 
     public String addCustomer(){
-        //TODO: Přidat ID aktuálního uživatele
-         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-         String name = auth.getName(); //get logged in username
- 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
         Long userID = userService.getUserByUsername(name).get(0).getId();
         if((id = customerService.addCustomer(name,email,defaultSla, userID)) != null)
             return "/customer/detail.xhtml?faces-redirect=true&id=" + id;
