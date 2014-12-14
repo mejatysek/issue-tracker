@@ -6,13 +6,20 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
-      xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
+      xsi:schemaLocation="http://java.sun.com/jsf/facelets "
+      xmlns:sec="http://www.springframework.org/security/facelets/tags">
 
 <h:body>
 
     <ui:composition template="/templates/layout.xhtml">
 
         <ui:define name="content">
+            <sec:ifNotGranted roles="ROLE_SALESMAN">
+                <p:panel>
+                    <h2>Access denied!</h2>
+                </p:panel>
+            </sec:ifNotGranted>
+        <sec:ifAllGranted roles="ROLE_SALESMAN">
             <h2>Customers <a href="/customer/add.xhtml" class="btn-primary btn">Add customer</a> </h2>
             <p:panel>
                 <h:form>
@@ -38,6 +45,7 @@
                     </p:dataTable>
                 </h:form>
             </p:panel>
+        </sec:ifAllGranted>
         </ui:define>
 
     </ui:composition>

@@ -48,7 +48,7 @@ public class LoginBean {
     public String logout() {
         SecurityContextHolder.getContext().setAuthentication(null);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Loged out", "loged out."));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Loged out", null));
         return "login";
     }
 
