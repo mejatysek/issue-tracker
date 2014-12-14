@@ -42,9 +42,9 @@ public class CustomerBean {
     public String addCustomer(){
         //TODO: Přidat ID aktuálního uživatele
         if((id = customerService.addCustomer(name,email,defaultSla, 1l)) != null)
-            return "success?faces-redirect=true&includeViewParams=true";
+            return "/customer/detail.xhtml?faces-redirect=true&id=" + id;
         else
-            return "fail";
+            return null;
     }
 
     public String editCustomer(){
@@ -55,9 +55,9 @@ public class CustomerBean {
         customerDto.setSla(defaultSla);
 
         if((id = customerService.editCustomer(customerDto)) != null)
-            return "success?faces-redirect=true&includeViewParams=true";
+            return "/customer/detail.xhtml?faces-redirect=true&id=" + id;
         else
-            return "fail";
+            return null;
     }
 
     public List<CustomerDto> getCustomers(boolean showActive) {
@@ -73,6 +73,13 @@ public class CustomerBean {
         customers = null;
         customerService.deactivateCustomer(id);
         return "/customers";
+    }
+
+    public String deactivateProduct(Long id){
+        productService.deactivateProduct(id);
+
+        return "?faces-redirect=true&includeViewParams=true";
+
     }
 
     public Long getId() {

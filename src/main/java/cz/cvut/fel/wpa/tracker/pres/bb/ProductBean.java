@@ -1,5 +1,7 @@
 package cz.cvut.fel.wpa.tracker.pres.bb;
 
+import cz.cvut.fel.wpa.tracker.dto.CustomerDto;
+import cz.cvut.fel.wpa.tracker.dto.ProductDto;
 import cz.cvut.fel.wpa.tracker.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -18,21 +20,32 @@ public class ProductBean {
     private ProductService productService;
 
     private Long id;
+    private Long loadId;
     private String name;
     private String sla;
     private Float price;
     private Long customerId;
 
     public String addProduct(){
-        if((id = productService.addProduct(name,sla,price,true, customerId)) != null)
-            return "success?faces-redirect=true&includeViewParams=true";
+        if((id = productService.addProduct(name, sla, price, true, customerId)) != null)
+            return "/customer/detail.xhtml?faces-redirect=true&id=" + customerId;
         else
-            return "fail";
+            return null;
     }
 
-    public void deactivateProduct(Long id){
-        productService.deactivateProduct(id);
+    public String editProduct(){
+        ProductDto productDto = productService.getProductById(id);
+
+        productDto.setSla(sla);
+        productDto.setName(name);
+        productDto.setPrice(price);
+
+        if((id = productService.editProduct(productDto)) != null)
+            return "/customer/detail.xhtml?faces-redirect=true&id=" + customerId;
+        else
+            return null;
     }
+
 
     public String getName() {
         return name;
@@ -72,5 +85,20 @@ public class ProductBean {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getLoadId() {
+        return loadId;
+    }
+
+    public void setLoadId(Long loadId) {
+        this.loadId = loadId;
+        this.id = loadId;
+
+        ProductDto productDto = productService.getProductById(loadId);
+        name = productDto.getName();
+        sla = productDto.getSla();
+        price = productDto.getPrice();
+        customerId = productDto.getCustomer();
     }
 }

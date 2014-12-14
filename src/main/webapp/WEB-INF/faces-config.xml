@@ -41,39 +41,4 @@
             <to-view-id>/user/add.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-
-
-    <navigation-rule>
-        <from-view-id>/customer/add.xhtml </from-view-id>
-        <navigation-case>
-            <display-name>Customer added</display-name>
-            <from-action>#{costumerBean.addUser()}</from-action>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/customer/detail.xhtml</to-view-id>
-        </navigation-case>
-
-        <navigation-case>
-            <display-name>User not added</display-name>
-            <from-action>#{costumerBean.addUser()}</from-action>
-            <from-outcome>fail</from-outcome>
-            <to-view-id>/customer/add.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-
-    <navigation-rule>
-        <from-view-id>/product/add.xhtml </from-view-id>
-        <navigation-case>
-            <display-name>Product added</display-name>
-            <from-action>#{productBean.addProduct()}</from-action>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/customer/detail.xhtml</to-view-id>
-        </navigation-case>
-
-        <navigation-case>
-            <display-name>Product not added</display-name>
-            <from-action>#{productBean.addProduct()}</from-action>
-            <from-outcome>fail</from-outcome>
-            <to-view-id>/customer/add.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
 </faces-config>

@@ -55,7 +55,9 @@
                                     <h:outputText value="#{product.price}"/>
                                 </p:column>
                                 <p:column headerText="">
-                                    <h:commandLink rendered="#{product.state}" action="#{productBean.deactivateProduct(product.id)}" value="Deactivate"/>
+                                    <!--TODO: Nefunkční DeactivateProduct-->
+                                    <h:link value="Edit" outcome="/product/edit"><f:param name="id" value="#{product.id}"/> </h:link> |
+                                    <h:commandLink rendered="#{product.state}" action="#{customerBean.deactivateProduct(product.id)}" value="Deactivate"/>
                                 </p:column>
                             </p:dataTable>
                         </h:form>
