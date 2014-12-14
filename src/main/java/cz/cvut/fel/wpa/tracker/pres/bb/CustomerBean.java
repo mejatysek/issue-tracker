@@ -48,8 +48,8 @@ public class CustomerBean {
 
     public String addCustomer(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName(); //get logged in username
-        Long userID = userService.getUserByUsername(name).get(0).getId();
+        String uname = auth.getName(); //get logged in username
+        Long userID = userService.getUserByUsername(uname).get(0).getId();
         if((id = customerService.addCustomer(name,email,defaultSla, userID)) != null)
             return "/customer/detail.xhtml?faces-redirect=true&id=" + id;
         else

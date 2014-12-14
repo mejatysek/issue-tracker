@@ -2,10 +2,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
+
+<f:metadata>
+    <f:viewParam name="issueId" value="#{issueBean.id}" />
+</f:metadata>
+
+<h:body>
+
+    <ui:composition template="/templates/layout.xhtml">
+
+        <ui:define name="content">
+            <h2>Add operation</h2>
+
+            <h:form>
+                <div class="row mb20">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-8">
+                        <p:inputTextarea placeholder="Description of issue" style="width: 100%; height: 400px; " id="description" required="true" requiredMessage="Please enter description of issue." value="#{issueBean.description}"/>
+                        <p:message for="description"/>
+                    </div>
+                </div>
+                <h:commandButton styleClass="btn btn-primary btn-block" action="#{issueBean.addOpperation()}" value="Add operation" />
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
 </html>

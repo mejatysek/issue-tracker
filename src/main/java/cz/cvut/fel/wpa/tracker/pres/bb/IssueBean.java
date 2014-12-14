@@ -61,6 +61,15 @@ public class IssueBean {
 
         return "/issue/detail.xhtml?faces-redirect=true&id=" + id;
     }
+    
+        public String addOpperation(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+        Long userID = userService.getUserByUsername(name).get(0).getId();
+        operationService.addOperation(new Date(), userID, id, description);
+
+        return "/issue/detail.xhtml?faces-redirect=true&id=" + id;
+    }
 
     public List<IssueDto> getIssues() {return issueService.getAllIssue();}
 
