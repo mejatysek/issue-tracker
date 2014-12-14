@@ -4,14 +4,72 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
+
+
+<f:metadata>
+    <f:viewParam name="id" value="#{issueBean.detailId}"/>
+</f:metadata>
 
 <h:body>
 
     <ui:composition template="/templates/layout.xhtml">
 
         <ui:define name="content">
-            <h2>This is issueList content</h2>
+            <h2>
+                <h:outputText value="#{issueBean.topic}"/>
+                <h:form style="display: inline">
+                    <h:commandLink rendered="#{customerBean.state}"
+                                   action="#{customerBean.deactivateCustomer(customerBean.id)}"
+                                   styleClass="btn btn-warning" value="Deactivate"/>&nbsp;
+                </h:form>
+            </h2>
+
+            <!--TODO: Zobrazení správného state-->
+            <div><strong>State: </strong> <h:outputText value="#{issueBean.state}"/></div>
+
+            <h3>
+                Relations
+                <h:link styleClass="btn btn-primary" outcome="/issue/addRelation" value="Add relation"><f:param
+                        name="issueId" value="#{issueBean.id}"/> </h:link>
+            </h3>
+            <p:panel>
+                <h:form>
+                    <p:growl/>
+                    <p:dataTable var="relation" widgetVar="relationTable" value="#{issueBean.getRelations()}">
+                        <p:column headerText="Issue">
+                            <h:outputText value="#{issueBean.getIssueNamesFromIds(relation.issues)}"/>
+                        </p:column>
+                        <p:column headerText="Type">
+                            <h:outputText value="#{relation.type}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:panel>
+
+            <h3>
+                Operations
+                <h:link styleClass="btn btn-primary" outcome="/issue/addOperation" value="Add operation"><f:param
+                        name="issueId" value="#{issueBean.id}"/> </h:link>
+            </h3>
+            <p:panel>
+                <h:form>
+                    <p:growl/>
+                    <p:dataTable var="operation" widgetVar="operationTable" value="#{issueBean.getOperations()}">
+                        <p:column headerText="Time" sortBy="#{operation.time}">
+                            <h:outputText value="#{operation.time}"/>
+                        </p:column>
+                        <p:column headerText="User">
+                            <h:outputText value="#{issueBean.getUserNameFromId(operation.owner)}"/>
+                        </p:column>
+                        <p:column headerText="Description">
+                            <h:outputText value="#{operation.body}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:panel>
         </ui:define>
 
     </ui:composition>

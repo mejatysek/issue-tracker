@@ -19,6 +19,9 @@ public interface ProductService {
     @Transactional(readOnly = true)
     public List<ProductDto> getCustomerProducts(Long customerId);
 
+    @Transactional(readOnly = true)
+    public List<ProductDto> getProductsByState(boolean isActive);
+
     public ProductDto getProductById(Long id);
 
     public Long editProduct(ProductDto product);
@@ -28,4 +31,5 @@ public interface ProductService {
     public Long addProduct(String name, String sla, float price, boolean state, Long customer, List<Long> issues);
 
     public void deactivateProduct(Long id);
+
 }

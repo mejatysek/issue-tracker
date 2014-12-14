@@ -117,6 +117,19 @@ public class UserServiceImpl extends AbstractDataAccessService implements UserSe
     }
 
     @Override
+    public List<UserDto> getIssueUsers(Long issueId) {
+        List<UserDto> list = new ArrayList<UserDto>();
+        List<User> relations = genericDao.getById(issueId, Issue.class).getWorkers();
+
+        if (relations != null) {
+            for (User u : relations) {
+                list.add(dtoFromBo(u));
+            }
+        }
+        return list;
+    }
+
+    @Override
     public List<UserDto> getAllUsers() {
         List<UserDto> list = new ArrayList<UserDto>();
         List<User> users = genericDao.getAll(User.class);

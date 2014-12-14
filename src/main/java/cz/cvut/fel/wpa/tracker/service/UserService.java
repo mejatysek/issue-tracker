@@ -29,6 +29,9 @@ public interface UserService {
     public UserDto getUserById(Long id);
 
     @Transactional(readOnly = true)
+    public List<UserDto> getIssueUsers(Long issueId);
+
+    @Transactional(readOnly = true)
     public List<UserDto> getAllUsers();
 
     @Transactional(readOnly = true)

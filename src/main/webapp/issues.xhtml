@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
       xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
 
 <h:body>
@@ -13,7 +14,6 @@
 
         <ui:define name="content">
             <h2>Issues <a href="/issue/add.xhtml" class="btn btn-primary">Add issue</a> </h2>
-            <!--TODO: Nemá smysl začínát Issues, nejdřív všechno ostatní a Issues jako poslední-->
             <p:panel>
                 <h:form>
                     <p:growl/>
@@ -25,10 +25,9 @@
                             <h:outputText value="#{issue.state}"/>
                         </p:column>
                         <p:column headerText="Last user">
-                            <h:outputText value="#{issue.operation}"/>
                         </p:column>
                         <p:column headerText="">
-                            <h:outputText value="#{issue.state}"/>
+                            <h:link value="Detail" outcome="/issue/detail"><f:param name="id" value="#{issue.id}"/> </h:link>
                         </p:column>
                     </p:dataTable>
                 </h:form>

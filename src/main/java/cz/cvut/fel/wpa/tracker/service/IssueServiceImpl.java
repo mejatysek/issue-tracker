@@ -1,9 +1,6 @@
 package cz.cvut.fel.wpa.tracker.service;
 
-import cz.cvut.fel.wpa.tracker.bo.Issue;
-import cz.cvut.fel.wpa.tracker.bo.Operation;
-import cz.cvut.fel.wpa.tracker.bo.Relation;
-import cz.cvut.fel.wpa.tracker.bo.User;
+import cz.cvut.fel.wpa.tracker.bo.*;
 import cz.cvut.fel.wpa.tracker.dto.CustomerDto;
 import cz.cvut.fel.wpa.tracker.dto.IssueDto;
 import cz.cvut.fel.wpa.tracker.dto.UserDto;
@@ -144,6 +141,8 @@ public class IssueServiceImpl extends AbstractDataAccessService implements Issue
         Issue issue = new Issue();
         issue.setTopic(topic);
         issue.setState(state);
+        issue.setProduct(genericDao.getById(product, Product.class));
+
         List<User> usersList = new ArrayList<User>();
         if (workers != null) {
             for (Long user : workers) {
@@ -151,6 +150,7 @@ public class IssueServiceImpl extends AbstractDataAccessService implements Issue
             }
         }
         issue.setWorkers(usersList);
+
         List<Operation> operationList = new ArrayList<Operation>();
         if (operations != null) {
             for (Long operation : operations) {
@@ -158,12 +158,14 @@ public class IssueServiceImpl extends AbstractDataAccessService implements Issue
             }
         }
         issue.setOperations(operationList);
+
         List<Relation> relationList = new ArrayList<Relation>();
         if (relations != null) {
             for (Long relation : relations) {
                 relationList.add(genericDao.getById(relation, Relation.class));
             }
         }
+
         issue.setRelations(relationList);
         return genericDao.saveOrUpdate(issue).getId();
     }

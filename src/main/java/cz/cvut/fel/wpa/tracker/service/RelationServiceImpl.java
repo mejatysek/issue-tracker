@@ -47,7 +47,8 @@ public class RelationServiceImpl extends AbstractDataAccessService implements Re
     @Override
     public List<RelationDto> getIssueRelations(Long issueId) {
         List<RelationDto> list = new ArrayList<RelationDto>();
-        List<Relation> relations = genericDao.getByProperty("issue", issueId, Relation.class);
+        List<Relation> relations = genericDao.getById(issueId, Issue.class).getRelations();
+
         if (relations != null) {
             for (Relation u : relations) {
                 list.add(dtoFromBo(u));

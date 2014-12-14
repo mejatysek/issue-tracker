@@ -44,6 +44,18 @@ public class ProductServiceImpl extends AbstractDataAccessService implements Pro
     }
 
     @Override
+    public List<ProductDto> getProductsByState(boolean isActive) {
+        List<ProductDto> productDtos = new ArrayList<ProductDto>();
+        List<Product> list = genericDao.getByProperty("state", isActive, Product.class);
+        if (list != null) {
+            for (Product product : list) {
+                productDtos.add(dtoFromBo(product));
+            }
+        }
+        return productDtos;
+    }
+
+    @Override
     public ProductDto getProductById(Long id) {
         Product u = genericDao.getById(id, Product.class);
         if (u != null) {

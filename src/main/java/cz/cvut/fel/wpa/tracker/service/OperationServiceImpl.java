@@ -62,7 +62,7 @@ public class OperationServiceImpl extends AbstractDataAccessService implements O
     @Override
     public List<OperationDto> getIssueOperations(Long issueId) {
         List<OperationDto> operationDtos = new ArrayList<OperationDto>();
-        List<Operation> operations = genericDao.getByProperty("issue", issueId, Operation.class);
+        List<Operation> operations = genericDao.getById(issueId, Issue.class).getOperations();
 
         if (operations != null) {
             for (Operation operation : operations) {

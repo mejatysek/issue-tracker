@@ -4,16 +4,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
 
 <h:body>
 
     <ui:composition template="/templates/layout.xhtml">
 
         <ui:define name="content">
-            <h2>This is issueList content</h2>
+            <h2>Add issue</h2>
+
+            <h:form>
+                <div class="row mb20">
+                    <div class="col-md-4">
+                        <div class="mb20">
+                            <p:inputText placeholder="Topic" id="topic" required="true" requiredMessage="Please enter topic."  value="#{issueBean.topic}" >
+                                <f:validateLength minimum="4"  />
+                            </p:inputText>
+                            <p:message for="topic"/>
+                        </div>
+                        <div class="mb20">
+                            <p:outputLabel for="product" value="Product:" />
+                            <p:selectOneListbox id="product" required="true" requiredMessage="Please select product."   value="#{issueBean.productId}">
+                                <f:validateRequired/>
+                                <f:selectItems value="#{productBean.getAllActiveProducts()}" var="product" itemLabel="#{product.name}" itemValue="#{product.id}" />
+                            </p:selectOneListbox>
+                            <p:message for="product"/>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <p:inputTextarea placeholder="Description of issue" style="width: 100%; height: 400px; " id="description" required="true" requiredMessage="Please enter description of issue." value="#{issueBean.description}"/>
+                        <p:message for="description"/>
+                    </div>
+                </div>
+                <h:commandButton styleClass="btn btn-primary btn-block" action="#{issueBean.addIssue()}" value="Add issue" />
+            </h:form>
+
         </ui:define>
 
     </ui:composition>
+
 </h:body>
 </html>

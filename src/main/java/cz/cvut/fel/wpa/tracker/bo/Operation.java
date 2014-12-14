@@ -8,8 +8,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Operation")
-@NamedQuery(name="Operation.findAll", query="SELECT o FROM Operation o")
 public class Operation extends AbstractBusinessObject {
 
     @Temporal(TemporalType.TIMESTAMP)

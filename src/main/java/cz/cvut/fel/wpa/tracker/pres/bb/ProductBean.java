@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Author: Adam Uhlíř <uhlir.a@gmail.com>
  * Date: 13.12.14
@@ -46,6 +48,9 @@ public class ProductBean {
             return null;
     }
 
+    public List<ProductDto> getAllActiveProducts(){
+        return productService.getProductsByState(true);
+    }
 
     public String getName() {
         return name;

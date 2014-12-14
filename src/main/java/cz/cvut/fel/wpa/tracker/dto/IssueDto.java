@@ -65,4 +65,12 @@ public class IssueDto extends  AbstractDto{
     public void setRelations(List<Long> relations) {
         this.relations = relations;
     }
+
+    public Long getProduct() {
+        return product;
+    }
+
+    public void setProduct(Long product) {
+        this.product = product;
+    }
 }

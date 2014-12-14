@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://primefaces.org/ui"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
       xsi:schemaLocation="http://java.sun.com/jsf/facelets ">
 
@@ -40,7 +41,6 @@
                 <div class="col-md-8">
                     <h3>Products <h:link outcome="/product/add" value="Add product" styleClass="btn-primary btn"><f:param name="customerId" value="#{customerBean.id}" /></h:link></h3>
 
-                    <!--TODO: Product detail s výpisem napojených issues -->
                     <p:panel>
                         <h:form>
                             <p:growl/>
