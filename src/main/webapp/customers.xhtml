@@ -20,7 +20,7 @@
                 </p:panel>
             </sec:ifNotGranted>
         <sec:ifAllGranted roles="ROLE_SALESMAN">
-            <h2>Customers <a href="/customer/add.xhtml" class="btn-primary btn">Add customer</a> </h2>
+            <h2>Customers <a href="customer/add.xhtml" class="btn-primary btn">Add customer</a> </h2>
             <p:panel>
                 <h:form>
                     <p:growl/>
@@ -32,11 +32,11 @@
                             <h:outputText value="#{customer.email}"/>
                         </p:column>
                         <p:column headerText="">
-                            <h:link value="Detail" outcome="/customer/detail">
+                            <h:link value="Detail" outcome="customer/detail">
                                 <f:param name="id" value="#{customer.id}"/>
                             </h:link>
                             |
-                            <h:link value="Edit" outcome="/customer/edit">
+                            <h:link value="Edit" outcome="customer/edit">
                                 <f:param name="id" value="#{customer.id}"/>
                             </h:link>
                             |

@@ -20,7 +20,7 @@
         <ui:define name="content">
             <h2>
                 <h:outputText value="#{customerBean.name}"/> &nbsp;
-                <h:link styleClass="btn btn-success" outcome="/customer/edit" value="Edit"><f:param name="id" value="#{customerBean.id}"/> </h:link>&nbsp;
+                <h:link styleClass="btn btn-success" outcome="customer/edit" value="Edit"><f:param name="id" value="#{customerBean.id}"/> </h:link>&nbsp;
                 <h:form style="display: inline">
                     <h:commandLink rendered="#{customerBean.state}" action="#{customerBean.deactivateCustomer(customerBean.id)}" styleClass="btn btn-warning" value="Deactivate"/>&nbsp;
                 </h:form>
@@ -39,7 +39,7 @@
                     </dl>
                 </div>
                 <div class="col-md-8">
-                    <h3>Products <h:link outcome="/product/add" value="Add product" styleClass="btn-primary btn"><f:param name="customerId" value="#{customerBean.id}" /></h:link></h3>
+                    <h3>Products <h:link outcome="product/add" value="Add product" styleClass="btn-primary btn"><f:param name="customerId" value="#{customerBean.id}" /></h:link></h3>
 
                     <p:panel>
                         <h:form>
@@ -56,7 +56,7 @@
                                 </p:column>
                                 <p:column headerText="">
                                     <!--TODO: Nefunkční DeactivateProduct-->
-                                    <h:link value="Edit" outcome="/product/edit"><f:param name="id" value="#{product.id}"/> </h:link> |
+                                    <h:link value="Edit" outcome="product/edit"><f:param name="id" value="#{product.id}"/> </h:link> |
                                     <h:commandLink rendered="#{product.state}" action="#{customerBean.deactivateProduct(product.id)}" value="Deactivate"/>
                                 </p:column>
                             </p:dataTable>

@@ -13,7 +13,7 @@
     <ui:composition template="/templates/layout.xhtml">
 
         <ui:define name="content">
-            <h2>Issues <a href="/issue/add.xhtml" class="btn btn-primary">Add issue</a> </h2>
+            <h2>Issues <a href="issue/add.xhtml" class="btn btn-primary">Add issue</a> </h2>
             <p:panel>
                 <h:form>
                     <p:growl/>
@@ -27,7 +27,7 @@
                         <p:column headerText="Last user">
                         </p:column>
                         <p:column headerText="">
-                            <h:link value="Detail" outcome="/issue/detail"><f:param name="id" value="#{issue.id}"/> </h:link>
+                            <h:link value="Detail" outcome="issue/detail"><f:param name="id" value="#{issue.id}"/> </h:link>
                         </p:column>
                     </p:dataTable>
                 </h:form>
